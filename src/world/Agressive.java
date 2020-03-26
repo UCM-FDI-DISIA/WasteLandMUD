@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.swing.Timer;
 
 /**
+ * PEDO
  * Aggressive is a particularly nasty mob strategy. It will attack any player
  * upon entering the room. Variations of Aggressive could be built which
  * discriminate between targets based on level, or to even follow players into
