@@ -3,6 +3,7 @@ package server;
 import java.io.*;
 import java.net.*;
 
+import interpreter.CommandList;
 import world.Dreadnaught;
 import world.Gunner;
 import world.Interpreter;
@@ -292,7 +293,7 @@ public class Client implements Runnable {
 				return "";
 			} else if (temp.equalsIgnoreCase("commands")) {
 				String result = "";
-				for (String command : interpreter.getCommandDescriptions()) {
+				for (String command : CommandList.getCommandDescriptions()) {
 					result += command + '\n';
 				}
 				this.sendReply(result);
@@ -352,7 +353,7 @@ public class Client implements Runnable {
 	 * @return - True if word is a command word.
 	 */
 	private boolean startsWithCommand(String text) {
-		for (String command : interpreter.getCommands()) {
+		for (String command : CommandList.getCommands()) {
 			if (text.equalsIgnoreCase(command)) {
 				return true;
 			}
