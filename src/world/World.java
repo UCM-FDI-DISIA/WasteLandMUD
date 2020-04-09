@@ -20,7 +20,7 @@ import java.util.*;
  */
 public class World implements Runnable {
 
-	private transient static World instance = new World();
+	private transient static World instance;
 	private transient Thread saveThread;
 	private transient boolean threadsLocked;
 	private transient Object lockObject = new Object();
@@ -37,6 +37,19 @@ public class World implements Runnable {
 	private World() {
 		this.saveThread = new Thread(this);
 		this.saveThread.start();
+	}
+
+	/**
+	 * This method returns the Singleton instance of the world.
+	 * 
+	 * @return - The Instance of the World
+	 */
+	public static World getInstance() {
+		
+		if(instance == null) {
+			instance = new World();
+		}
+		return instance;
 	}
 
 	/**
@@ -96,15 +109,6 @@ public class World implements Runnable {
 		}
 		return null;
 
-	}
-
-	/**
-	 * This method returns the Singleton instance of the world.
-	 * 
-	 * @return - The Instance of the World
-	 */
-	public static World getInstance() {
-		return instance;
 	}
 
 	/**
