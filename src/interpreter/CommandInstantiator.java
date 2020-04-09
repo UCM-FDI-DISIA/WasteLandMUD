@@ -4,6 +4,7 @@ import java.util.List;
 
 import interpreter.command.Command;
 import interpreter.command.ReformatLine;
+import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSay;
@@ -63,6 +64,10 @@ public class CommandInstantiator {
 				
 				break;
 
+			case "commands":
+
+				 command = new CommandCommands(player);	
+				break;
 		}
 		
 		return command;		

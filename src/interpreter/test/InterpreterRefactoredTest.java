@@ -15,9 +15,11 @@ public class InterpreterRefactoredTest {
 				//"say piss off";
 				//"say";
 
-				//
-				"emote piss off";
+				//"emote piss off";
 				//"emote";
+
+				//
+				"commands";
 		
 		interpreter.processCommand(player, textCommand);
 	}
