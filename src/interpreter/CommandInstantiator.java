@@ -6,6 +6,7 @@ import interpreter.command.Command;
 import interpreter.command.ReformatLine;
 import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandDescribeMe;
+import interpreter.command.impl.CommandDrop;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandInspect;
 import interpreter.command.impl.CommandInventory;
@@ -160,6 +161,19 @@ public class CommandInstantiator {
 			case "score":
 
 				command = new CommandScore(player);
+				
+				break;
+
+			case "drop":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandDrop(player, target);
+				}
+				else {
+					 command = new CommandDrop(player);					
+				}
 				
 				break;
 		}
