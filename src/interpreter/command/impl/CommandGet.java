@@ -38,8 +38,7 @@ public class CommandGet extends AbstractCommand {
 				
 				this.get(itemName);				
 			}
-			else {
-				
+			else {				
 
 				String itemName = arguments.get(0);
 				String target = arguments.get(1);

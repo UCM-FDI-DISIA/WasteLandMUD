@@ -9,6 +9,7 @@ import interpreter.command.impl.CommandDescribeMe;
 import interpreter.command.impl.CommandDrop;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandGet;
+import interpreter.command.impl.CommandGive;
 import interpreter.command.impl.CommandInspect;
 import interpreter.command.impl.CommandInventory;
 import interpreter.command.impl.CommandLook;
@@ -195,6 +196,14 @@ public class CommandInstantiator {
 			case "get":
 				command = 
 				  new CommandGet(
+					player, 
+					parsedCommandSequence.subList(1, parsedCommandSequence.size()));
+				
+				break;
+
+			case "give":
+				command = 
+				  new CommandGive(
 					player, 
 					parsedCommandSequence.subList(1, parsedCommandSequence.size()));
 				
