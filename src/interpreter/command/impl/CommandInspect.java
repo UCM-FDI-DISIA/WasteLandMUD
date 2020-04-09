@@ -25,11 +25,11 @@ public class CommandInspect extends AbstractCommand {
 	@Override
 	public void execute() {
 		
-		if(target == null) {
-			inspect(player, target);		
+		if(target == null) {	
+			player.sendToPlayer("Inspect what?");	
 		}
 		else {
-			player.sendToPlayer("Inspect what?");		
+			inspect(player, target);		
 		}
 	}
 

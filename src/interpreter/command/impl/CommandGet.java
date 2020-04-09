@@ -2,20 +2,20 @@ package interpreter.command.impl;
 
 import world.Player;
 
-public class CommandDrop extends AbstractCommand {
+public class CommandGet extends AbstractCommand {
 
 	Player player;
 	String target;
 
-	public CommandDrop() {
+	public CommandGet() {
 
 	}
 
-	public CommandDrop(Player player) {
+	public CommandGet(Player player) {
 		this.player = player;
 	}
 
-	public CommandDrop(Player player, String target) {
+	public CommandGet(Player player, String target) {
 		this.player = player;
 		this.target = target;
 	}
@@ -24,10 +24,10 @@ public class CommandDrop extends AbstractCommand {
 	public void execute() {
 		
 		if(target == null) {
-			player.sendToPlayer("Drop what?");	
+			player.sendToPlayer("Get what?");
 		}
-		else {	
-			player.dropGear(target);	
+		else {
+			player.use(target);			
 		}
 	}
 

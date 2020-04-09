@@ -190,6 +190,19 @@ public class CommandInstantiator {
 				}
 				
 				break;
+
+			case "get":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandUse(player, target);
+				}
+				else {
+					 command = new CommandUse(player);					
+				}
+				
+				break;
 		}
 		
 		return command;		

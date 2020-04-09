@@ -24,11 +24,10 @@ public class CommandUse extends AbstractCommand {
 	public void execute() {
 		
 		if(target == null) {
-			player.use(target);	
+			player.sendToPlayer("Use what?");
 		}
 		else {
-			player.sendToPlayer("Use what?");		
-		}
-	}
+			player.use(target);			
+		}	}
 
 }
