@@ -8,6 +8,7 @@ import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandDescribeMe;
 import interpreter.command.impl.CommandDrop;
 import interpreter.command.impl.CommandEmote;
+import interpreter.command.impl.CommandGet;
 import interpreter.command.impl.CommandInspect;
 import interpreter.command.impl.CommandInventory;
 import interpreter.command.impl.CommandLook;
@@ -192,15 +193,10 @@ public class CommandInstantiator {
 				break;
 
 			case "get":
-				if(parsedCommandSequence.size()>1) {
-
-					String target  = parsedCommandSequence.get(1);
-
-					 command = new CommandUse(player, target);
-				}
-				else {
-					 command = new CommandUse(player);					
-				}
+				command = 
+				  new CommandGet(
+					player, 
+					parsedCommandSequence.subList(1, parsedCommandSequence.size()));
 				
 				break;
 		}
