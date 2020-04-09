@@ -17,6 +17,7 @@ import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
 import interpreter.command.impl.CommandScore;
+import interpreter.command.impl.CommandSetClass;
 import interpreter.command.impl.CommandShutdown;
 import interpreter.command.impl.CommandTell;
 import interpreter.command.impl.CommandUse;
@@ -206,6 +207,19 @@ public class CommandInstantiator {
 				  new CommandGive(
 					player, 
 					parsedCommandSequence.subList(1, parsedCommandSequence.size()));
+				
+				break;
+
+			case "setclass":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandSetClass(player, target);
+				}
+				else {
+					 command = new CommandSetClass(player);					
+				}
 				
 				break;
 		}
