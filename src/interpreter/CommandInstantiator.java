@@ -7,6 +7,7 @@ import interpreter.command.ReformatLine;
 import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandRude;
+import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
 import interpreter.command.impl.CommandWho;
 import world.Player;
@@ -73,6 +74,11 @@ public class CommandInstantiator {
 			case "who":
 
 				 command = new CommandWho(player);	
+				break;
+
+			case "save":
+
+				 command = new CommandSave(player);	
 				break;
 		}
 		
