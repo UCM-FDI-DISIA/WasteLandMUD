@@ -13,10 +13,12 @@ public class InterpreterRefactoredTest {
 		
 		String textCommand = 
 				//"say piss off";
+				//"say";
+
 				//
-				"say";
+				"emote piss off";
+				//"emote";
 		
 		interpreter.processCommand(player, textCommand);
 	}
-
 }

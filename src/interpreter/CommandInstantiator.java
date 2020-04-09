@@ -4,6 +4,7 @@ import java.util.List;
 
 import interpreter.command.Command;
 import interpreter.command.ReformatLine;
+import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandSay;
 import world.Player;
 
@@ -14,7 +15,7 @@ public class CommandInstantiator {
 		Command command = null;
 		
 		String commandWord = parsedCommandSequence.get(0);
-
+		
 		switch(commandWord) {
 
 			case "say":  
@@ -30,7 +31,23 @@ public class CommandInstantiator {
 				else {
 					 command = new CommandSay(player, "Say what?");					
 				}
-			break;
+				break;
+
+			case "emote":
+				if(parsedCommandSequence.size()>1) {
+
+					String message  = 
+							ReformatLine.reformat(
+									parsedCommandSequence.subList(1, parsedCommandSequence.size())
+									);
+
+					 command = new CommandEmote(player, message);
+				}
+				else {
+					 command = new CommandEmote(player, "Emote what?");					
+				}
+				
+				break;
 
 		}
 		
