@@ -15,5 +15,4 @@ public class ReformatLine {
 		
 		return out.toString().trim();		
 	}
-
 }

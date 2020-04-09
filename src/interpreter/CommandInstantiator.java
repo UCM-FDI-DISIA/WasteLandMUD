@@ -222,6 +222,66 @@ public class CommandInstantiator {
 				}
 				
 				break;
+
+			case "north":
+				 command = new CommandSetClass(player, "n");
+				
+				break;
+				
+			case "n":
+				 command = new CommandSetClass(player, "n");
+				
+				break;
+				
+			case "south":
+				 command = new CommandSetClass(player, "s");
+				
+				break;
+				
+			case "s":
+				 command = new CommandSetClass(player, "s");
+				
+				break;
+
+			case "east":
+				 command = new CommandSetClass(player, "e");
+				
+				break;
+				
+			case "e":
+				 command = new CommandSetClass(player, "e");
+				
+				break;
+				
+			case "west":
+				 command = new CommandSetClass(player, "w");
+				
+				break;
+				
+			case "w":
+				 command = new CommandSetClass(player, "w");
+				
+				break;
+				
+			case "up":
+				 command = new CommandSetClass(player, "u");
+				
+				break;
+				
+			case "u":
+				 command = new CommandSetClass(player, "u");
+				
+				break;
+				
+			case "down":
+				 command = new CommandSetClass(player, "d");
+				
+				break;
+				
+			case "d":
+				 command = new CommandSetClass(player, "d");
+				
+				break;
 		}
 		
 		return command;		

@@ -41,23 +41,4 @@ public class CommandGive extends AbstractCommand {
 			}	
 		}
 	}
-
-	/*
-	 * Tell sends a message between two players, visible only to them.
-	 * 
-	 * @param player The initiating player of the whisper
-	 * 
-	 * @param otherPlayer The recipient of the whisper
-	 * 
-	 * @param message The actual text of the whisper
-	 */
-	private void tell(Player player, Player otherPlayer, String message) {
-		if (otherPlayer != null) {
-			otherPlayer.sendToPlayer("chat " + player.getName()
-					+ " whispers : " + message);
-			player.sendToPlayer("chat You whisper to " + otherPlayer.getName()
-					+ ": " + message);
-		} else
-			player.sendToPlayer("Player does not exist.");
-	}
 }

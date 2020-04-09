@@ -13,5 +13,4 @@ public abstract class AbstractCommand implements Command {
 
 	@Override
 	public abstract void execute();
-
 }

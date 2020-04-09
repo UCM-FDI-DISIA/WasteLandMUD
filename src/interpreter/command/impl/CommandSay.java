@@ -1,8 +1,5 @@
 package interpreter.command.impl;
 
-import java.util.List;
-
-import interpreter.command.ReformatLine;
 import interpreter.command.Trace;
 import world.Player;
 import world.Room;
@@ -34,6 +31,5 @@ public class CommandSay extends AbstractCommand {
 			((Room) this.world.getDatabaseObject(player.getRoomId()))
 			.sendToRoom("chat " + player.getName() + " says: " + message);
 		}
-
 	}
 }

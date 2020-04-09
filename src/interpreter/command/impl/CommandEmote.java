@@ -21,7 +21,6 @@ public class CommandEmote extends AbstractCommand {
 	public void execute() {
 		
 		message = player.getName() + " " +message;
-
 		
 		if(Trace.getTraceSwitch()) {
 
@@ -32,10 +31,7 @@ public class CommandEmote extends AbstractCommand {
 		else {
 
 			((Room) player.getLocation()).sendToRoom(player.getName()
-					+ " " + message);
-			
+					+ " " + message);			
 		}
-
 	}
-
 }

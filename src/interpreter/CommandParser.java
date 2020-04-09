@@ -22,5 +22,4 @@ public class CommandParser {
 		
 		return parsedCommandSequence;		
 	}
-
 }
