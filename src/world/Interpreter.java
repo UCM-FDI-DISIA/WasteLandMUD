@@ -18,7 +18,7 @@ import interpreter.CommandList;
  */
 public class Interpreter {
 
-	private static Interpreter instance = new Interpreter();
+	private static Interpreter instance;
 	private World world;
 
 	// This private constructor initializes the command list, it is private so
@@ -26,6 +26,22 @@ public class Interpreter {
 	private Interpreter() {
 
 		this.world = World.getInstance();
+	}
+
+
+	/**
+	 *getInstance() returns a static reference to this Interpreter following
+	 * the Singleton pattern. This will be used by server.Client to gain a
+	 * reference to the interpreter to which it is sending commands.
+	 * 
+	 * @return a reference to the Singleton Interpreter.
+	 */
+	public static Interpreter getInstance() {
+
+		if(instance == null) {
+			instance =  new Interpreter();
+		}
+		return instance;
 	}
 
 	/**
@@ -352,17 +368,6 @@ public class Interpreter {
 	 */
 	public World getWorld() {
 		return this.world;
-	}
-
-	/**
-	 *getInstance() returns a static reference to this Interpreter following
-	 * the Singleton pattern. This will be used by server.Client to gain a
-	 * reference to the interpreter to which it is sending commands.
-	 * 
-	 * @return a reference to the Singleton Interpreter.
-	 */
-	public static Interpreter getInstance() {
-		return instance;
 	}
 
 	/*
