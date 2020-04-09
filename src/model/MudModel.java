@@ -19,7 +19,7 @@ import world.*;
  */
 public class MudModel extends Observable {
 
-	private static MudModel model = new MudModel();
+	private static MudModel model;
 	private String textModel;
 	private String chatTextModel;
 
@@ -28,6 +28,18 @@ public class MudModel extends Observable {
 	private MudModel() {
 		textModel = "";
 		chatTextModel = "";
+	}
+
+	/**
+	 * This method returns the instance of the MudModel.
+	 * 
+	 * @return - The MudModel instance.
+	 */
+	public static MudModel getMudModel() {
+		if(model == null) {
+			model = new MudModel();
+		}
+		return model;
 	}
 
 	/**
@@ -54,14 +66,5 @@ public class MudModel extends Observable {
 		chatTextModel += text;
 		setChanged();
 		this.notifyObservers(new ChatCommand(text));
-	}
-
-	/**
-	 * This method returns the instance of the MudModel.
-	 * 
-	 * @return - The MudModel instance.
-	 */
-	public static MudModel getMudModel() {
-		return model;
 	}
 }
