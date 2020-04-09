@@ -12,6 +12,7 @@ import interpreter.command.impl.CommandLook;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
+import interpreter.command.impl.CommandShutdown;
 import interpreter.command.impl.CommandTell;
 import interpreter.command.impl.CommandWho;
 import world.Player;
@@ -133,6 +134,12 @@ public class CommandInstantiator {
 				else {
 					 command = new CommandInspect(player);					
 				}
+				
+				break;
+
+			case "shutdown":
+
+				command = new CommandShutdown(player);
 				
 				break;
 		}
