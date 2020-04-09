@@ -13,6 +13,7 @@ import interpreter.command.impl.CommandLook;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
+import interpreter.command.impl.CommandScore;
 import interpreter.command.impl.CommandShutdown;
 import interpreter.command.impl.CommandTell;
 import interpreter.command.impl.CommandWho;
@@ -153,6 +154,12 @@ public class CommandInstantiator {
 			case "i":
 
 				command = new CommandInventory(player);
+				
+				break;
+
+			case "score":
+
+				command = new CommandScore(player);
 				
 				break;
 		}

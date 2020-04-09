@@ -12,7 +12,6 @@ public class CommandInventory extends AbstractCommand {
 
 	public CommandInventory(Player player) {
 		this.player = player;
-
 	}
 
 	@Override
