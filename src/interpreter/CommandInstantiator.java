@@ -5,10 +5,12 @@ import java.util.List;
 import interpreter.command.Command;
 import interpreter.command.ReformatLine;
 import interpreter.command.impl.CommandCommands;
+import interpreter.command.impl.CommandDescribeMe;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
+import interpreter.command.impl.CommandTell;
 import interpreter.command.impl.CommandWho;
 import world.Player;
 
@@ -79,6 +81,31 @@ public class CommandInstantiator {
 			case "save":
 
 				 command = new CommandSave(player);	
+				break;
+
+			case "describeme":
+				if(parsedCommandSequence.size()>1) {
+
+					String description  = 
+							ReformatLine.reformat(
+									parsedCommandSequence.subList(1, parsedCommandSequence.size())
+									);
+
+					 command = new CommandDescribeMe(player, description);
+				}
+				else {
+					 command = new CommandDescribeMe(player);					
+				}
+				
+				break;
+
+			case "tell":
+
+				command = 
+				     new CommandTell(
+						player, 
+						parsedCommandSequence.subList(1, parsedCommandSequence.size()));
+				
 				break;
 		}
 		
