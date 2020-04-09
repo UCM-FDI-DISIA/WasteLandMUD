@@ -8,6 +8,7 @@ import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSay;
+import interpreter.command.impl.CommandWho;
 import world.Player;
 
 public class CommandInstantiator {
@@ -67,6 +68,11 @@ public class CommandInstantiator {
 			case "commands":
 
 				 command = new CommandCommands(player);	
+				break;
+
+			case "who":
+
+				 command = new CommandWho(player);	
 				break;
 		}
 		
