@@ -17,6 +17,7 @@ import interpreter.command.impl.CommandSay;
 import interpreter.command.impl.CommandScore;
 import interpreter.command.impl.CommandShutdown;
 import interpreter.command.impl.CommandTell;
+import interpreter.command.impl.CommandUse;
 import interpreter.command.impl.CommandWho;
 import world.Player;
 
@@ -173,6 +174,19 @@ public class CommandInstantiator {
 				}
 				else {
 					 command = new CommandDrop(player);					
+				}
+				
+				break;
+
+			case "use":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandUse(player, target);
+				}
+				else {
+					 command = new CommandUse(player);					
 				}
 				
 				break;
