@@ -8,6 +8,7 @@ import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandDescribeMe;
 import interpreter.command.impl.CommandEmote;
 import interpreter.command.impl.CommandInspect;
+import interpreter.command.impl.CommandInventory;
 import interpreter.command.impl.CommandLook;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
@@ -140,6 +141,18 @@ public class CommandInstantiator {
 			case "shutdown":
 
 				command = new CommandShutdown(player);
+				
+				break;
+
+			case "inventory":
+
+				command = new CommandInventory(player);
+				
+				break;
+
+			case "i":
+
+				command = new CommandInventory(player);
 				
 				break;
 		}
