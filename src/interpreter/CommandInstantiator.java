@@ -7,6 +7,7 @@ import interpreter.command.ReformatLine;
 import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandDescribeMe;
 import interpreter.command.impl.CommandEmote;
+import interpreter.command.impl.CommandLook;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
@@ -105,6 +106,19 @@ public class CommandInstantiator {
 				     new CommandTell(
 						player, 
 						parsedCommandSequence.subList(1, parsedCommandSequence.size()));
+				
+				break;
+
+			case "look":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandLook(player, target);
+				}
+				else {
+					 command = new CommandLook(player);					
+				}
 				
 				break;
 		}
