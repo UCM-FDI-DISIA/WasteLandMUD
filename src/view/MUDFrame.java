@@ -53,8 +53,9 @@ public class MUDFrame extends JFrame {
 	 */
 	private boolean init() {
 
-		this.client = new network.Client("150.135.1.17", 4000);
-		//this.client = new network.Client("localhost", 4000);
+		//this.client = new network.Client("150.135.1.17", 4000);
+		//
+		this.client = new network.Client("localhost", 4000);
 
 		if ((this.client != null) && this.client.connect()) {
 			this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -1,12 +1,14 @@
 package server;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.SocketException;
 
 import interpreter.CommandList;
-import world.Dreadnaught;
-import world.Gunner;
 import world.Interpreter;
+import world.Player;
 import world.Room;
 
 /**
@@ -32,6 +34,8 @@ public class Client implements Runnable {
 	private world.Player player;
 	private MudServer server;
 	private Interpreter interpreter;
+	
+	private UserRegistrationHandler registrationHandler;
 
 	/**
 	 * Client constructor will set the instance variable of socket to the socket
@@ -48,6 +52,19 @@ public class Client implements Runnable {
 		this.interpreter = Interpreter.getInstance();
 		this.socket = socket;
 		this.server = server;
+		registrationHandler = new UserRegistrationHandler(this);
+	}
+	
+	public Player getPlayer() {
+		return this.player;
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+		
+	public void setState(server.ClientState  state) {
+		this.state = state;
 	}
 
 	/**
@@ -157,71 +174,7 @@ public class Client implements Runnable {
 				+ '"'
 				+ " to see a list of available game commands. It will help you gain some knowledge of how to play the game.");
 
-		boolean playerConfirmed = false;
-
-		// confirm player
-		while (!playerConfirmed) {
-
-			String name = "", tempName = "", password = "";
-
-			// get player name
-			while (name == null || name.length() < 1 || name.equals("")) {
-
-				while (tempName.equals("") || tempName.equals("commands")) {
-					this.sendReply("Input your player name:\n" + "(or type "
-							+ '"' + "new" + '"' + " for new player):");
-					tempName = receiveCommand();
-				}
-
-				if (!validEntry(tempName) && !tempName.equalsIgnoreCase("new"))
-					tempName = "";
-
-				// if new player, get name and password
-				if (tempName.equals("new")) {
-
-					String newName = "";
-
-					while (newName.equals("") || newName.equals("commands")) {
-						sendReply("What player name would you like?\n"
-								+ "(please no spaces and cannot be a command keyword,\n"
-								+ "type " + '"' + "commands" + '"'
-								+ " to see a list of commands)");
-						newName = receiveCommand();
-					}
-
-					if (interpreter.getWorld().nameExists(newName)) {
-						this.sendReply("That name is reserved.");
-						newName = "";
-					}
-
-					if (!newName.equals("") && this.validEntry(newName)) {
-						this.getNewPlayerPasswordAndAddToWorld(newName);
-						return;
-					} else {
-						newName = "";
-						tempName = "";
-					}
-				}
-
-				name = tempName;
-			}
-
-			// get password of existing player
-			while (password.equals("")) {
-				this.sendReply("Please type in your password:");
-				password = receiveCommand();
-			}
-
-			// confirm player
-			if (interpreter.getWorld().confirmPlayer(name, password)) {
-				if (this.loadPlayerFromFile(name)) {
-					this.addToWorld();
-					playerConfirmed = true;
-				}
-			} else {
-				this.sendReply("Invalid user name or password.");
-			}
-		}
+		this.registrationHandler.checkPlayerAccess();
 	}
 
 	/*
@@ -283,7 +236,7 @@ public class Client implements Runnable {
 	 * 
 	 * @return - A String that represents the text passed in the command.
 	 */
-	private String receiveCommand() {
+	public String receiveCommand() {
 		try {
 			String temp = ((Communication) this.input.readObject()).getText();
 			if (temp == null)
@@ -307,145 +260,5 @@ public class Client implements Runnable {
 			shutdown();
 		}
 		return "";
-	}
-
-	/*
-	 * This private methods compares the first password entered to the confirm
-	 * password entered for new players and also determines if the password has
-	 * valid characters and length.
-	 * 
-	 * @return A boolean, true if password is a valid password.
-	 */
-	private boolean confirmPassword(String firstPassword, String confirmPassword) {
-		return !startsWithCommand(firstPassword)
-				&& firstPassword.equals(confirmPassword)
-				&& !firstPassword.contains(" ") && firstPassword.length() > 5;
-				
-	}
-
-	/*
-	 * This method checks to see if new name has space, already exists, or is a
-	 * command return false.
-	 */
-	private boolean validEntry(String name) {
-        
-		boolean result = !name.contains(" ") && !this.startsWithCommand(name);
-		if (!result) {
-			sendReply("That entry is invalid or reserved.");
-			return false;
-		}
-		for (int i = 0; i< name.length();i++) {
-			int Ascii = name.charAt(i);
-			if (Ascii < 65 || Ascii > 90 && Ascii <97 || Ascii >122){
-				sendReply("That entry is invalid or reserved.");
-				return false;
-			}
-		}
-		
-		
-		return true;
-	}
-
-	/*
-	 * This private method checks to make sure text being entered as names or
-	 * passwords are not commands.
-	 * 
-	 * @return - True if word is a command word.
-	 */
-	private boolean startsWithCommand(String text) {
-		for (String command : CommandList.getCommands()) {
-			if (text.equalsIgnoreCase(command)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	/*
-	 * This method gets the new player password and adds the player to the
-	 * world.
-	 */
-	private void getNewPlayerPasswordAndAddToWorld(String newName) {
-
-		String firstPassword = "", confirmPassword = "";
-		boolean done = false;
-		while (!done) {
-
-			// get password.
-			sendReply("Please type a six or more character password:\n"
-					+ "(no spaces and no commands):");
-
-			firstPassword = receiveCommand();
-
-			// confirm password
-			sendReply("Please confirm your password:");
-			confirmPassword = receiveCommand();
-
-			// check password
-			if (this.confirmPassword(firstPassword, confirmPassword)) {
-				// add to world
-				this.player = interpreter.getWorld().createPlayer(newName,
-						firstPassword);
-				if (player != null) {
-					this.interpreter.getWorld().savePlayer(this.player);
-					String characterClass = "";
-					while (!(characterClass.equalsIgnoreCase("dreadnaught") || characterClass
-							.equalsIgnoreCase("gunner"))
-							&& (state != ClientState.DONE)) {
-						this.sendReply("What character class"
-								+ " would you like to be:"
-								+ " Gunner or Dreadnaught?");
-						characterClass = receiveCommand();
-					}
-					if (state != ClientState.DONE) {
-						if (characterClass.equalsIgnoreCase("gunner")) {
-							this.player.setClient(this);
-							this.player.setCharacterClass(Gunner.getInstance());
-						}
-						if (characterClass.equalsIgnoreCase("dreadnaught")) {
-							this.player.setClient(this);
-							this.player.setCharacterClass(Dreadnaught
-									.getInstance());
-						}
-						this.addToWorld();
-					} else {
-						player = null;
-					}
-					done = true;
-				}
-			} else {
-				this.sendReply("Invalid password.");
-			}
-		}
-	}
-
-	/*
-	 * This method initializes the player instance variable from a loaded file.
-	 * 
-	 * @return true if sucessfully loaded.
-	 */
-	private boolean loadPlayerFromFile(String name) {
-		this.player = interpreter.getWorld().loadPlayer(name);
-		if(this.player!= null){
-			this.player.setClient(this);
-		}
-		return this.player != null;
-	}
-
-	/*
-	 * This method sets the player instance variable up with the necessary
-	 * setting required for gameplay.
-	 */
-	private void addToWorld() {
-
-		if (this.player != null) {
-			interpreter.getWorld().addLoggedOn(
-					this.player.getName().toLowerCase());
-			this.state = ClientState.PLAYING;
-			this.player.moveToRoom((Room) interpreter.getWorld()
-					.getDatabaseObject(this.player.getRoomId()));
-			((Room) this.player.getLocation()).sendToRoom(this.player.getName()
-					+ " enters game.",player);
-		}
 	}
 }
