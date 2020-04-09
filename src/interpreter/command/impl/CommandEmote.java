@@ -13,11 +13,14 @@ public class CommandEmote extends AbstractCommand {
 	}
 
 	public CommandEmote(Player player, String message) {
+		this.player = player;
 		this.message = message;
 	}
 
 	@Override
 	public void execute() {
+		
+		message = player.getName() + " " +message;
 
 		
 		if(Trace.getTraceSwitch()) {

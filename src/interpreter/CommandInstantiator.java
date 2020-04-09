@@ -5,6 +5,7 @@ import java.util.List;
 import interpreter.command.Command;
 import interpreter.command.ReformatLine;
 import interpreter.command.impl.CommandEmote;
+import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSay;
 import world.Player;
 
@@ -45,6 +46,19 @@ public class CommandInstantiator {
 				}
 				else {
 					 command = new CommandEmote(player, "Emote what?");					
+				}
+				
+				break;
+
+			case "rude":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandRude(player, target);
+				}
+				else {
+					 command = new CommandRude(player);					
 				}
 				
 				break;

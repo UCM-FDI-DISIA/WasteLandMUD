@@ -17,6 +17,7 @@ public class CommandSay extends AbstractCommand {
 	}
 
 	public CommandSay(Player player, String message) {
+		this.player = player;
 		this.message = message;
 	}
 
