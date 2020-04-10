@@ -8,9 +8,9 @@ import java.net.SocketException;
 
 import interpreter.CommandList;
 import interpreter.InterpreterRefactored;
-import world.Interpreter;
 import world.Player;
 import world.Room;
+import world.World;
 
 /**
  * server.Client is created whenever a new player network.Client connects to the
@@ -34,7 +34,6 @@ public class Client implements Runnable {
 	private volatile server.ClientState state;
 	private world.Player player;
 	private MudServer server;
-	private Interpreter interpreter;
 	
 	private UserRegistrationHandler registrationHandler;
 
@@ -50,7 +49,6 @@ public class Client implements Runnable {
 	 * 
 	 */
 	public Client(Socket socket, MudServer server) {
-		this.interpreter = Interpreter.getInstance();
 		this.socket = socket;
 		this.server = server;
 		registrationHandler = new UserRegistrationHandler(this);
@@ -113,10 +111,10 @@ public class Client implements Runnable {
 		try {
 			while (state != ClientState.DONE) {
 
-				synchronized (interpreter.getWorld().getLockObject()) {
-					while (interpreter.getWorld().threadsLocked()) {
+				synchronized (World.getInstance().getLockObject()) {
+					while (World.getInstance().threadsLocked()) {
 						try {
-							interpreter.getWorld().getLockObject().wait();
+							World.getInstance().getLockObject().wait();
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -220,10 +218,10 @@ public class Client implements Runnable {
 				((Room) temp.player.getLocation()).remove(this.player.getName()
 						.toLowerCase());
 				// temp.player.setLocation(null);
-				interpreter.getWorld().savePlayer(temp.player);
+				World.getInstance().savePlayer(temp.player);
 
 				// remove player's name from list of logged on players.
-				interpreter.getWorld().removeLoggedOn(
+				World.getInstance().removeLoggedOn(
 						temp.player.getName().toLowerCase());
 			}
 			temp = null;
