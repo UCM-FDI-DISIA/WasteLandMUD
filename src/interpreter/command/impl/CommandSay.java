@@ -1,6 +1,5 @@
 package interpreter.command.impl;
 
-import interpreter.command.Trace;
 import world.Player;
 import world.Room;
 
@@ -20,16 +19,8 @@ public class CommandSay extends AbstractCommand {
 
 	@Override
 	public void execute() {
-		
-		if(Trace.getTraceSwitch()) {
 
-			System.out.println("SAY");
-			
-			System.out.println(message);
-		}
-		else {
-			((Room) this.world.getDatabaseObject(player.getRoomId()))
-			.sendToRoom("chat " + player.getName() + " says: " + message);
-		}
+		((Room) this.world.getDatabaseObject(player.getRoomId()))
+		.sendToRoom("chat " + player.getName() + " says: " + message);
 	}
 }

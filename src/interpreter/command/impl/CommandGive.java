@@ -19,7 +19,7 @@ public class CommandGive extends AbstractCommand {
 	}
 
 	@Override
-	public void execute() {
+	public synchronized void execute() {
 
 		if(arguments.isEmpty()) {
 

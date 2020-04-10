@@ -14,6 +14,7 @@ import interpreter.command.impl.CommandGive;
 import interpreter.command.impl.CommandInspect;
 import interpreter.command.impl.CommandInventory;
 import interpreter.command.impl.CommandLook;
+import interpreter.command.impl.CommandMove;
 import interpreter.command.impl.CommandRude;
 import interpreter.command.impl.CommandSave;
 import interpreter.command.impl.CommandSay;
@@ -229,62 +230,62 @@ public class CommandInstantiator {
 			//  movement commands
 
 			case "north":
-				 command = new CommandSetClass(player, "n");
+				 command = new CommandMove(player, "n");
 				
 				break;
 				
 			case "n":
-				 command = new CommandSetClass(player, "n");
+				 command = new CommandMove(player, "n");
 				
 				break;
 				
 			case "south":
-				 command = new CommandSetClass(player, "s");
+				 command = new CommandMove(player, "s");
 				
 				break;
 				
 			case "s":
-				 command = new CommandSetClass(player, "s");
+				 command = new CommandMove(player, "s");
 				
 				break;
 
 			case "east":
-				 command = new CommandSetClass(player, "e");
+				 command = new CommandMove(player, "e");
 				
 				break;
 				
 			case "e":
-				 command = new CommandSetClass(player, "e");
+				 command = new CommandMove(player, "e");
 				
 				break;
 				
 			case "west":
-				 command = new CommandSetClass(player, "w");
+				 command = new CommandMove(player, "w");
 				
 				break;
 				
 			case "w":
-				 command = new CommandSetClass(player, "w");
+				 command = new CommandMove(player, "w");
 				
 				break;
 				
 			case "up":
-				 command = new CommandSetClass(player, "u");
+				 command = new CommandMove(player, "u");
 				
 				break;
 				
 			case "u":
-				 command = new CommandSetClass(player, "u");
+				 command = new CommandMove(player, "u");
 				
 				break;
 				
 			case "down":
-				 command = new CommandSetClass(player, "d");
+				 command = new CommandMove(player, "d");
 				
 				break;
 				
 			case "d":
-				 command = new CommandSetClass(player, "d");
+				 command = new CommandMove(player, "d");
 				
 				break;
 				
@@ -339,6 +340,11 @@ public class CommandInstantiator {
 				else {
 					 command = new CommandWound(player);					
 				}
+				
+				break;
+			
+			default :
+				player.sendToPlayer(command + " is not understood.");
 				
 				break;
 		}

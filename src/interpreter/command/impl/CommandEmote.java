@@ -1,6 +1,5 @@
 package interpreter.command.impl;
 
-import interpreter.command.Trace;
 import world.Player;
 import world.Room;
 
@@ -18,20 +17,11 @@ public class CommandEmote extends AbstractCommand {
 	}
 
 	@Override
-	public void execute() {
+	public synchronized void execute() {
 		
 		message = player.getName() + " " +message;
-		
-		if(Trace.getTraceSwitch()) {
 
-			System.out.println("EMOTE");
-			
-			System.out.println(message);
-		}
-		else {
-
-			((Room) player.getLocation()).sendToRoom(player.getName()
-					+ " " + message);			
-		}
+		((Room) player.getLocation()).sendToRoom(player.getName()
+				+ " " + message);		
 	}
 }

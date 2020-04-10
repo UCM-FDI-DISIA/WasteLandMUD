@@ -48,12 +48,16 @@ public class CommandGet extends AbstractCommand {
 		}
 	}
 	
-	private void get(String itemName) {
+	private synchronized void get(String itemName) {
 		
 		boolean found = false;
+		
+		System.out.println("GET " + itemName);
 
 		for (Gear roomItem : ((Room) player.getLocation())
 				.listGear()) {
+
+			System.out.println("SEE " + roomItem.getName());
 			if (roomItem.getName().equalsIgnoreCase(itemName)) {
 				found = true;
 				if (roomItem instanceof GearContainer
@@ -74,7 +78,7 @@ public class CommandGet extends AbstractCommand {
 		}		
 	}
 	
-	private void get(String itemName, String target) {
+	private synchronized void get(String itemName, String target) {
 		
 		boolean giveable = false;
 		

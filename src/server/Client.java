@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import interpreter.CommandList;
+import interpreter.InterpreterRefactored;
 import world.Interpreter;
 import world.Player;
 import world.Room;
@@ -197,7 +198,9 @@ public class Client implements Runnable {
 					+ " says: " + textIn);
 		} else if (!textIn.equals("") || textIn != null) {
 			// send command to interpreter
-			interpreter.processCommand(this.player, textIn);
+			//interpreter.processCommand(this.player, textIn);
+			//
+			InterpreterRefactored.getInstance().processCommand(this.player, textIn);
 		}
 	}
 

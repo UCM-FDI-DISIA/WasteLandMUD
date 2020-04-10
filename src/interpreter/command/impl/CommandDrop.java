@@ -21,7 +21,7 @@ public class CommandDrop extends AbstractCommand {
 	}
 
 	@Override
-	public void execute() {
+	public synchronized void execute() {
 		
 		if(target == null) {
 			player.sendToPlayer("Drop what?");	

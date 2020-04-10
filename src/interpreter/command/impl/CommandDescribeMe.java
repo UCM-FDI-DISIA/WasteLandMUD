@@ -21,7 +21,7 @@ public class CommandDescribeMe extends AbstractCommand {
 	}
 
 	@Override
-	public void execute() {
+	public synchronized void execute() {
 		if(description != null) {
 
 			player.setDescription(description);
