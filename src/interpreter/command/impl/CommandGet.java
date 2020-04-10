@@ -52,9 +52,7 @@ public class CommandGet extends AbstractCommand {
 	private synchronized void get(String itemName) {
 		
 		boolean found = false;
-		
-		System.out.println("GET " + itemName);
-		
+				
 		List<Gear> gearAvailable = ((Room) player.getLocation()).listGear();
 		
 		Iterator<Gear> it = gearAvailable.iterator();

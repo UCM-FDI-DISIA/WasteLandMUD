@@ -1,11 +1,12 @@
 package server;
 
 import java.io.IOException;
-import java.net.*;
-import java.util.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 import world.CreateWorld;
-import world.Interpreter;
 import world.World;
 import world.WorldNotFoundException;
 
@@ -54,18 +55,18 @@ public class MudServer {
 
 		
 		try {
-			Interpreter.getInstance().getWorld().loadWorld();
+			World.getInstance().loadWorld();
 		} catch (WorldNotFoundException e) {
 			new CreateWorld().createWorld();
 		}
 		
-		if (!Interpreter.getInstance().getWorld().confirmPlayer(
+		if (!World.getInstance().confirmPlayer(
 				"administrator", "password")) {
-			Interpreter.getInstance().getWorld().createPlayer("administrator",
+			World.getInstance().createPlayer("administrator",
 					"password");
-			Interpreter.getInstance().getWorld().saveWorld();
-			Interpreter.getInstance().getWorld().savePlayer(
-					Interpreter.getInstance().getWorld().getPlayer(
+			World.getInstance().saveWorld();
+			World.getInstance().savePlayer(
+					World.getInstance().getPlayer(
 							"administrator"));
 		}
 		MudServer mudServer = new MudServer(LISTENER_PORT);
