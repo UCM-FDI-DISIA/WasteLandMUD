@@ -3,19 +3,16 @@ package server;
 import interpreter.CommandList;
 import world.Dreadnaught;
 import world.Gunner;
-import world.Interpreter;
 import world.Player;
 import world.Room;
+import world.World;
 
 public class UserRegistrationHandler {
-
-	private Interpreter interpreter;
 	
 	server.Client client;
 
 	public UserRegistrationHandler() {
-
-		this.interpreter = Interpreter.getInstance();
+		
 	}
 
 	public UserRegistrationHandler(server.Client client) {
@@ -58,7 +55,7 @@ public class UserRegistrationHandler {
 						newName = this.client.receiveCommand();
 					}
 
-					if (interpreter.getWorld().nameExists(newName)) {
+					if (World.getInstance().nameExists(newName)) {
 						this.client.sendReply("That name is reserved.");
 						newName = "";
 					}
@@ -82,7 +79,7 @@ public class UserRegistrationHandler {
 			}
 
 			// confirm player
-			if (interpreter.getWorld().confirmPlayer(name, password)) {
+			if (World.getInstance().confirmPlayer(name, password)) {
 				if (this.loadPlayerFromFile(name)) {
 					this.addToWorld();
 					playerConfirmed = true;
@@ -169,10 +166,10 @@ public class UserRegistrationHandler {
 			if (this.confirmPassword(firstPassword, confirmPassword)) {
 				// add to world
 				
-				Player player2use = interpreter.getWorld().createPlayer(newName,firstPassword);
+				Player player2use = World.getInstance().createPlayer(newName,firstPassword);
 				if (player2use != null) {
 					this.client.setPlayer(player2use);
-					this.interpreter.getWorld().savePlayer(player2use);
+					World.getInstance().savePlayer(player2use);
 					String characterClass = "";
 					while (!(characterClass.equalsIgnoreCase("dreadnaught") || characterClass
 							.equalsIgnoreCase("gunner"))
@@ -209,7 +206,7 @@ public class UserRegistrationHandler {
 	 * @return true if sucessfully loaded.
 	 */
 	private boolean loadPlayerFromFile(String name) {
-		this.client.setPlayer(interpreter.getWorld().loadPlayer(name));
+		this.client.setPlayer(World.getInstance().loadPlayer(name));
 		if(this.client.getPlayer() != null){
 			this.client.getPlayer().setClient(this.client);
 		}
@@ -223,10 +220,10 @@ public class UserRegistrationHandler {
 	private void addToWorld() {
 
 		if (this.client.getPlayer() != null) {
-			interpreter.getWorld().addLoggedOn(
+			World.getInstance().addLoggedOn(
 					this.client.getPlayer().getName().toLowerCase());
 			this.client.setState(ClientState.PLAYING);
-			this.client.getPlayer().moveToRoom((Room) interpreter.getWorld()
+			this.client.getPlayer().moveToRoom((Room) World.getInstance()
 					.getDatabaseObject(this.client.getPlayer().getRoomId()));
 			((Room) this.client.getPlayer().getLocation()).sendToRoom(this.client.getPlayer().getName()
 					+ " enters game.",this.client.getPlayer());
