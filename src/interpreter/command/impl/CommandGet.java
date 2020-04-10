@@ -1,5 +1,6 @@
 package interpreter.command.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import world.Gear;
@@ -53,29 +54,38 @@ public class CommandGet extends AbstractCommand {
 		boolean found = false;
 		
 		System.out.println("GET " + itemName);
+		
+		List<Gear> gearAvailable = ((Room) player.getLocation()).listGear();
+		
+		Iterator<Gear> it = gearAvailable.iterator();
+		
+		Gear whatIWant = null;
+		
+		while(!found && it.hasNext()) {
+			Gear roomItem = it.next();
 
-		for (Gear roomItem : ((Room) player.getLocation())
-				.listGear()) {
-
-			System.out.println("SEE " + roomItem.getName());
 			if (roomItem.getName().equalsIgnoreCase(itemName)) {
 				found = true;
-				if (roomItem instanceof GearContainer
-						&& !((GearContainer) roomItem)
-								.canBeCarried()) {
-					player.sendToPlayer(itemName
-							+ " cannot be carried.");
-				}
-				else {
-					player.addGear(roomItem);
-					((Room) player.getLocation()).remove(roomItem);							
-				}
-			}
+				 whatIWant = roomItem;
+			}			
 		}
+
 		if(!found) {
 
 			player.sendToPlayer(itemName + " is not in the room.");
-		}		
+		}	
+		else {
+			if (whatIWant instanceof GearContainer
+					&& !((GearContainer) whatIWant)
+							.canBeCarried()) {
+				player.sendToPlayer(itemName
+						+ " cannot be carried.");
+			}
+			else {
+				player.addGear(whatIWant);
+				((Room) player.getLocation()).remove(whatIWant);							
+			}			
+		}
 	}
 	
 	private synchronized void get(String itemName, String target) {
