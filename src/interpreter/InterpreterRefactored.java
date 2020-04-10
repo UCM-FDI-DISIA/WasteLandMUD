@@ -30,7 +30,7 @@ public class InterpreterRefactored {
 	
 	public synchronized void processCommand(Player player, String textCommand) {
 		
-		List<String> parsedCommandSequence = CommandParser.parseCommand(textCommand);
+		List<String> parsedCommandSequence = CommandTokenizer.parseCommand(textCommand);
 		
 		if(!parsedCommandSequence.isEmpty()) {
 			
