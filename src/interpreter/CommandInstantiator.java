@@ -4,6 +4,7 @@ import java.util.List;
 
 import interpreter.command.Command;
 import interpreter.command.ReformatLine;
+import interpreter.command.impl.CommandCombat;
 import interpreter.command.impl.CommandCommands;
 import interpreter.command.impl.CommandDescribeMe;
 import interpreter.command.impl.CommandDrop;
@@ -19,9 +20,11 @@ import interpreter.command.impl.CommandSay;
 import interpreter.command.impl.CommandScore;
 import interpreter.command.impl.CommandSetClass;
 import interpreter.command.impl.CommandShutdown;
+import interpreter.command.impl.CommandSnipe;
 import interpreter.command.impl.CommandTell;
 import interpreter.command.impl.CommandUse;
 import interpreter.command.impl.CommandWho;
+import interpreter.command.impl.CommandWound;
 import world.Player;
 
 public class CommandInstantiator {
@@ -222,6 +225,8 @@ public class CommandInstantiator {
 				}
 				
 				break;
+			
+			//  movement commands
 
 			case "north":
 				 command = new CommandSetClass(player, "n");
@@ -280,6 +285,60 @@ public class CommandInstantiator {
 				
 			case "d":
 				 command = new CommandSetClass(player, "d");
+				
+				break;
+				
+			//  combat commands
+
+			case "attack":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandCombat(player, target);
+				}
+				else {
+					 command = new CommandCombat(player);					
+				}
+				
+				break;
+
+			case "kill":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandCombat(player, target);
+				}
+				else {
+					 command = new CommandCombat(player);					
+				}
+				
+				break;
+
+			case "snipe":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandSnipe(player, target);
+				}
+				else {
+					 command = new CommandSnipe(player);					
+				}
+				
+				break;
+
+			case "wound":
+				if(parsedCommandSequence.size()>1) {
+
+					String target  = parsedCommandSequence.get(1);
+
+					 command = new CommandWound(player, target);
+				}
+				else {
+					 command = new CommandWound(player);					
+				}
 				
 				break;
 		}

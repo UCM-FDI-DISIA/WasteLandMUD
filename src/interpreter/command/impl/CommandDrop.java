@@ -30,5 +30,4 @@ public class CommandDrop extends AbstractCommand {
 			player.dropGear(target);	
 		}
 	}
-
 }
