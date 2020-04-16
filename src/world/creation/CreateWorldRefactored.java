@@ -26,20 +26,25 @@ import world.World;
  * 
  */
 public class CreateWorldRefactored {
+
+	private World world = World.getInstance();
 	
 	GearFactory gearFactory;
 	WeaponFactory weaponFactory;
 	OrbFactory orbFactory;
 	ArmorFactory armorFactory;
 	
+	MobileFactory0 mobileFactory;
+	
 	public CreateWorldRefactored() {
 		gearFactory = new GearFactory();	
 		weaponFactory = new WeaponFactory ();
 		orbFactory = new OrbFactory();
 		armorFactory = new ArmorFactory();
+		
+		mobileFactory = new MobileFactory0();
 	}
 
-	private World world = World.getInstance();
 
 	/**
 	 * This is the main method for creating the world. It will call one method
@@ -725,8 +730,11 @@ public class CreateWorldRefactored {
 						hiveQueensLair);
 
 		// Add mobs.
-		world.createMobile("Off-Duty Marine", "An off duty marine.",
-				campSquare, new Greets());
+		
+
+		Mobile marine = mobileFactory.buildMarine(campSquare);
+
+		world.addToWorld(marine);
 
 		Mobile rover = world.createMobile("Rover", "A mechanical dog.",
 				landingPad, new Mutters("Rover Woofs!"));
