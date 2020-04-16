@@ -1,0 +1,49 @@
+
+Room BC-LandingPad
+Name Base Camp: Landing Pad
+Description 
+Ships fly in low before disgorging their 
+small contingent of equipment, supplies, and more rarely, 
+people. The landing pads are surrounded with constantly 
+swirling dust, driving most new arrivals northward into the 
+shelter of the walled camp amidst the featureless wastes.
+END
+
+Room BC-CampSquare
+Name Base Camp: Camp Square
+Description 
+The camp bustles with motion. Here 
+inside the walls the storm of wind and dust outside is 
+subdued, but not entirely abated. If one wanted to get out 
+of the blowing grit, they'd likely need to head inside the 
+sturdy pre-fabricated buildings that fill the camp. Few 
+people cross the square unless traveling between the Landing 
+Pads to the south, the barracks to the west, the armory to 
+the east, or the camp's gates to the north.
+END
+
+
+Exit BC-LandingPad n BC-CampSquare
+Exit BC-CampSquare s BC-LandingPad
+
+Room BC-CampGate
+Name Base Camp: Camp Gate
+Description 
+Guards and emplaced guns keep the camp safe
+from outside threats, but once you walk north into the wastes, 
+you're on your own. the core of the mercenary camp lies deeper 
+behind the walls, south.
+END
+
+Exit BC-CampSquare n BC-CampGate
+Exit BC-CampGate s BC-LandingPad
+
+Room BC
+Name Base Camp
+Description 
+You shouldn't be seeing this!
+END
+
+ADD BC BC-LandingPad
+ADD BC BC-CampSquare
+ADD BC BC-CampGate
