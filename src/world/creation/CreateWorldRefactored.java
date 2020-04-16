@@ -3,16 +3,11 @@ package world.creation;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import world.Agressive;
 import world.Direction;
 import world.Gear;
 import world.GearContainer;
-import world.Greets;
 import world.Mobile;
-import world.Mutters;
-import world.PassiveAgressive;
 import world.Room;
-import world.Trait;
 import world.Weapon;
 import world.World;
 
@@ -38,7 +33,7 @@ public class CreateWorldRefactored {
 	
 	public CreateWorldRefactored() {
 		gearFactory = new GearFactory();	
-		weaponFactory = new WeaponFactory ();
+		weaponFactory = new WeaponFactory();
 		orbFactory = new OrbFactory();
 		armorFactory = new ArmorFactory();
 		
@@ -733,128 +728,41 @@ public class CreateWorldRefactored {
 		
 
 		Mobile marine = mobileFactory.buildMarine(campSquare);
-
 		world.addToWorld(marine);
 
-		Mobile rover = world.createMobile("Rover", "A mechanical dog.",
-				landingPad, new Mutters("Rover Woofs!"));
-		((Mutters) world.getMobile("Rover").getStrategy()).setMobile(rover);
+		Mobile rover = mobileFactory.buildRover(landingPad);
 		world.addToWorld(rover);
 
-		Mobile sandCat = world
-				.createMobile(
-						"Sand Cat",
-						"Not exactly a feline, but this sleek, "
-								+ "hard to catch creature is similar to a housecat in shape. "
-								+ "Also, it has huge digging claws. Weird.",
-						landingPad,
-						new Mutters(
-								"Sand Cat burrows into the ground, leaving a raised trail in the earth."));
-		((Mutters) world.getMobile("Sand_Cat").getStrategy())
-				.setMobile(sandCat);
-		world.getMobile("Sand_Cat").setStat(10, Trait.AGILITY);
-		world.getMobile("Sand_Cat").setStat(2, Trait.STRENGTH);
+		Mobile sandCat = mobileFactory.buildSandCat(landingPad);
 		world.addToWorld(sandCat);
+		
+		Mobile giantScorpion = mobileFactory.buildGiantScorpion(cave);
+		world.addToWorld(giantScorpion);
 
-		world
-				.createMobile(
-						"Giant Scorpion",
-						"A giant scorpion the likes of which the world has never seen.",
-						cave, new PassiveAgressive());
-		((Mobile) world.getMobile("Giant_Scorpion"))
-				.setStat(40, Trait.STRENGTH);
-		((Mobile) world.getMobile("Giant_Scorpion")).setStat(3, Trait.AGILITY);
 
-		world
-				.createMobile(
-						"Small Scorpion",
-						"A small scorpion the likes of which you've likely seen before.",
-						nearWaste, new PassiveAgressive());
-		((Mobile) world.getMobile("Small_Scorpion")).setStat(2, Trait.STRENGTH);
-		((Mobile) world.getMobile("Small_Scorpion")).setStat(7, Trait.AGILITY);
-		((Mobile) world.getMobile("Small_Scorpion")).setStat(15,
-				Trait.MAXHITPOINTS);
+		Mobile smallScorpion = mobileFactory.buildSmallScorpion(nearWaste);
+		world.addToWorld(smallScorpion);
 
-		world
-				.createMobile(
-						"Medium Scorpion",
-						"A medium scorpion the likes of which you've likely seen before.",
-						canyon, new PassiveAgressive());
-		((Mobile) world.getMobile("Medium_Scorpion"))
-				.setStat(3, Trait.STRENGTH);
-		((Mobile) world.getMobile("Medium_Scorpion")).setStat(8, Trait.AGILITY);
-		((Mobile) world.getMobile("Medium_Scorpion")).setStat(16,
-				Trait.MAXHITPOINTS);
+		Mobile mediumScorpion = mobileFactory.buildMediumScorpion(canyon);
+		world.addToWorld(mediumScorpion);
+		
 
-		world.createMobile("Lurker",
-				"A monstrous spider-like creature, whose fangs drip acid.",
-				cargoPod, new Agressive());
-		((Mobile) world.getMobile("Lurker")).setStat(6, Trait.STRENGTH);
-		((Mobile) world.getMobile("Lurker")).setStat(6, Trait.AGILITY);
-		((Mobile) world.getMobile("Lurker")).setStat(25, Trait.MAXHITPOINTS);
+		Mobile lurker = mobileFactory.buildLurker(cargoPod);
+		world.addToWorld(lurker);
+		
+		Mobile hiveScout = mobileFactory.buildHiveScout(hiveApproach);
+		world.addToWorld(hiveScout);
 
-		world
-				.createMobile(
-						"Hive Scout",
-						"A strange creature, like an eight-legged dog with "
-								+ "dozens of solid red eyes, and chitinous body-segmets "
-								+ "that turn into a whiplike tail.",
-						hiveApproach, new PassiveAgressive());
-		((Mobile) world.getMobile("Hive_Scout")).setStat(4, Trait.STRENGTH);
-		((Mobile) world.getMobile("Hive_Scout")).setStat(25, Trait.MAXHITPOINTS);
-		((Mobile) world.getMobile("Hive_Scout")).setStat(8, Trait.AGILITY);
-		((Mobile) world.getMobile("Hive_Scout")).setStat(3, Trait.TOUGHNESS);
+		Mobile hiveDrone = mobileFactory.buildHiveDrone(hiveApproach);
+		world.addToWorld(hiveDrone);
+		
+		Mobile hiveGuardian = mobileFactory.buildHiveGuardian(hivePerimeter);
+		world.addToWorld(hiveGuardian);
 
-		world
-				.createMobile(
-						"Hive Drone",
-						"A strange creature, like an eight-legged dog with "
-								+ "a white face, dozens of solid red eyes, and chitinous body-segmets "
-								+ "that turn into a whiplike tail.",
-						hiveApproach, new PassiveAgressive());
-		((Mobile) world.getMobile("Hive_Drone")).setStat(4, Trait.STRENGTH);
-		((Mobile) world.getMobile("Hive_Drone")).setStat(15, Trait.MAXHITPOINTS);
-		((Mobile) world.getMobile("Hive_Drone")).setStat(8, Trait.AGILITY);
-		((Mobile) world.getMobile("Hive_Drone")).setStat(3, Trait.TOUGHNESS);
+		Mobile hiveWorker = mobileFactory.buildHiveGuardian(hivePerimeter);
+		world.addToWorld(hiveWorker);
 
-		world
-				.createMobile(
-						"Hive Guardian",
-						"A strange armored beast, like a six-legged rhino with long talons and angry teeth.",
-						hivePerimeter, new Agressive());
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(9, Trait.STRENGTH);
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(6, Trait.AGILITY);
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(7, Trait.TOUGHNESS);
-		((Mobile) world.getMobile("Hive_Guardian"))
-				.setStat(40, Trait.MAXHITPOINTS);
-
-		world
-				.createMobile(
-						"Hive Worker",
-						"A strange insectile creature with the body of a gorilla and thick armored plates moves about ",
-						hivePerimeter,
-						new Mutters(
-								"A Hive Worker uses it's mandibles to gnaw a thick chunk "
-										+ "of organic material out of the wall, and take it "
-										+ "deeper into the hive before returning."));
-		((Mobile) world.getMobile("Hive_Worker")).setStat(9, Trait.STRENGTH);
-		((Mobile) world.getMobile("Hive_Worker")).setStat(2, Trait.AGILITY);
-		((Mobile) world.getMobile("Hive_Worker")).setStat(40, Trait.MAXHITPOINTS);
-		((Mutters) world.getMobile("Hive_Worker").getStrategy())
-				.setMobile(world.getMobile("Hive_Worker"));
-
-		world
-				.createMobile(
-						"Alien Queen",
-						"This enormous creature has a bulbous body and thousands of legs, and a vaguely face-like "
-								+ "construct filled with fangs and glittering ruby eyes. and often leaves dripping eggs in "
-								+ "it's wake as it meanders through it's deep chamber.",
-						hiveQueensLair, new Agressive());
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(16, Trait.STRENGTH);
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(6, Trait.AGILITY);
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(8, Trait.TOUGHNESS);
-		((Mobile) world.getMobile("Hive_Guardian")).setStat(200,
-				Trait.MAXHITPOINTS);
-
+		Mobile alienQueen = mobileFactory.buildHiveGuardian(hiveQueensLair);
+		world.addToWorld(alienQueen);
 	}
 }
