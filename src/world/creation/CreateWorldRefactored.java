@@ -1,12 +1,13 @@
 package world.creation;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import world.Agressive;
-import world.Armor;
 import world.Direction;
 import world.Gear;
 import world.GearContainer;
 import world.Greets;
-import world.HealthOrb;
 import world.Mobile;
 import world.Mutters;
 import world.PassiveAgressive;
@@ -29,11 +30,13 @@ public class CreateWorldRefactored {
 	GearFactory gearFactory;
 	WeaponFactory weaponFactory;
 	OrbFactory orbFactory;
+	ArmorFactory armorFactory;
 	
 	public CreateWorldRefactored() {
 		gearFactory = new GearFactory();	
 		weaponFactory = new WeaponFactory ();
 		orbFactory = new OrbFactory();
+		armorFactory = new ArmorFactory();
 	}
 
 	private World world = World.getInstance();
@@ -691,15 +694,15 @@ public class CreateWorldRefactored {
 						weaponFactory.buildLaserCannon(), brokenCargoPod);
 
 		world.addGearToWorld(
-				gearFactory.buildFlakVest(),
+				armorFactory.buildFlakVest(),
 				brokenCargoPod);
 
 		world.addGearToWorld(
-				gearFactory.buildRegolithSuit(), brokenCargoPod);
+				armorFactory.buildRegolithSuit(), brokenCargoPod);
 
 		world
 				.addGearToWorld(
-						gearFactory.buildTuxTandJeans(), brokenCargoPod);
+						armorFactory.buildTuxTandJeans(), brokenCargoPod);
 
 		// Easter-Egg Gear
 
@@ -714,7 +717,7 @@ public class CreateWorldRefactored {
 
 		world
 				.addGearToWorld(
-						gearFactory.buildAssaultCuirass(), cave);
+						armorFactory.buildAssaultCuirass(), cave);
 
 		world
 				.addGearToWorld(
