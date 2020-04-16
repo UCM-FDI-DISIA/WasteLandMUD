@@ -27,9 +27,11 @@ import world.World;
 public class CreateWorldRefactored {
 	
 	GearFactory gearFactory;
+	WeaponFactory weaponFactory;
 	
 	public CreateWorldRefactored() {
-		gearFactory = new GearFactory();		
+		gearFactory = new GearFactory();	
+		weaponFactory = new WeaponFactory ();
 	}
 
 	private World world = World.getInstance();
@@ -642,28 +644,28 @@ public class CreateWorldRefactored {
 		// Add gear
 
 		// Camp Gear
-		
-		// Weapons
-
-		world.addGearToWorld(
-				gearFactory.buildLaserPistol(),
-				campSquare);
 
 		GearContainer captainsDesk = 
 				gearFactory.buildCaptainsDesk();
 		world.addGearToWorld(captainsDesk, campSquareBunker);
+		
+		// Weapons
+
+		world.addGearToWorld(
+				weaponFactory.buildLaserPistol(),
+				campSquare);
 
 		world
 				.addGearToWorld(
-						gearFactory.buildLaserPistol(), captainsDesk);
+						weaponFactory.buildLaserPistol(), captainsDesk);
 
 		world
 				.addGearToWorld(
-						gearFactory.buildPlasmaGun(), captainsDesk);
+						weaponFactory.buildPlasmaGun(), captainsDesk);
 
 		world
 				.addGearToWorld(
-						gearFactory.buildVibroBlade(), captainsDesk);
+						weaponFactory.buildVibroBlade(), captainsDesk);
 		
 
 		// Orbs
@@ -680,11 +682,11 @@ public class CreateWorldRefactored {
 
 		world
 				.addGearToWorld(
-						gearFactory.buildOldLaserRifle(), brokenCargoPod);
+						weaponFactory.buildOldLaserRifle(), brokenCargoPod);
 
 		world
 				.addGearToWorld(
-						gearFactory.buildLaserCannon(), brokenCargoPod);
+						weaponFactory.buildLaserCannon(), brokenCargoPod);
 
 		world.addGearToWorld(
 				gearFactory.buildFlakVest(),
@@ -705,7 +707,7 @@ public class CreateWorldRefactored {
 
 		world
 				.addGearToWorld(
-						gearFactory.buildPlasmaMcCannon(),
+						weaponFactory.buildPlasmaMcCannon(),
 						brokenCargoPod);
 
 		world
@@ -714,7 +716,7 @@ public class CreateWorldRefactored {
 
 		world
 				.addGearToWorld(
-						gearFactory.buildMallignPattern(),
+						weaponFactory.buildMallignPattern(),
 						hiveQueensLair);
 
 		// Add mobs.
