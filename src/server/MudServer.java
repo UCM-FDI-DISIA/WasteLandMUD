@@ -9,6 +9,7 @@ import java.util.List;
 import world.CreateWorld;
 import world.World;
 import world.WorldNotFoundException;
+import world.creation.CreateWorldRefactored;
 
 /**
  * server.MudServer is the main server for our MUD. It will control all of the
@@ -57,7 +58,8 @@ public class MudServer {
 		try {
 			World.getInstance().loadWorld();
 		} catch (WorldNotFoundException e) {
-			new CreateWorld().createWorld();
+			//new CreateWorld().createWorld();
+			new CreateWorldRefactored().createWorld();
 		}
 		
 		if (!World.getInstance().confirmPlayer(
