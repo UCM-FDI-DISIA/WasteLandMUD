@@ -642,110 +642,79 @@ public class CreateWorldRefactored {
 		// Add gear
 
 		// Camp Gear
+		
+		// Weapons
 
 		world.addGearToWorld(
 				gearFactory.buildLaserPistol(),
 				campSquare);
 
-		GearContainer captainsDesk = new GearContainer("Captain's Cabinet",
-				"(The captain's gun cabinet.)", 5, false);
+		GearContainer captainsDesk = 
+				gearFactory.buildCaptainsDesk();
 		world.addGearToWorld(captainsDesk, campSquareBunker);
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Laser Rifle",
-								"(A brand new laser rifle. It is a little heavy, but packs a punch)",
-								1, 6), captainsDesk);
+						gearFactory.buildLaserPistol(), captainsDesk);
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Plasma Gun",
-								"(A brand new plasma gun. It is unwieldy, but also packs a whallop.)",
-								2, 9), captainsDesk);
+						gearFactory.buildPlasmaGun(), captainsDesk);
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Vibro-Blade",
-								"(A sword whose edge hums with slicing power, yearning for a Dreadnaught's gauntlets.)",
-								3, 15), captainsDesk);
+						gearFactory.buildVibroBlade(), captainsDesk);
+		
+
+		// Orbs
+
 
 		world
 				.addGearToWorld(
-						new HealthOrb(
-								"Life Orb",
-								"(A health orb, adds 5 hit points when used. Regenerates every 10 seconds. Dropping it would be a bad idea.)",
-								5), captainsDesk);
+						gearFactory.buildHealthOrb(), captainsDesk);
 		world
 				.addGearToWorld(
-						new HealthOrb(
-								"Long Life Orb",
-								"(A health orb, adds 10 hit points when used. Regenerates every 10 seconds. Dropping it would be a bad idea.)",
-								10), captainsDesk);
+						gearFactory.buildLongLifeOrb(), captainsDesk);
 
 		// Gear in the Wild
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Laser Rifle",
-								"(A bruised and beaten laser rifle which ahs seen it's share of combat.)",
-								1, 6), brokenCargoPod);
+						gearFactory.buildOldLaserRifle(), brokenCargoPod);
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Laser Cannon",
-								"(A brand new laser cannon with just a little dust on the lens.)",
-								3, 12), brokenCargoPod);
+						gearFactory.buildLaserCannon(), brokenCargoPod);
 
-		world.addGearToWorld(new Armor("Flak Vest",
-				"A sturdy vest meant to protect the wearer's torso.", 2, 'M'),
+		world.addGearToWorld(
+				gearFactory.buildFlakVest(),
 				brokenCargoPod);
 
-		world.addGearToWorld(new Armor("Regolith Suit",
-				"Armor made of the planet's processed regolith (very strong).",
-				2, 'H'), brokenCargoPod);
+		world.addGearToWorld(
+				gearFactory.buildRegolithSuit(), brokenCargoPod);
 
 		world
 				.addGearToWorld(
-						new Armor(
-								"Tuxedo T-Shirt and Jeans",
-								"Tuxedo T-Shirt and Jeans (even your Mom won't think your funny).",
-								1, 'L'), brokenCargoPod);
+						gearFactory.buildTuxTandJeans(), brokenCargoPod);
 
 		// Easter-Egg Gear
 
-		Gear orbOfSpontaneousReanimation = new HealthOrb("Reanimator",
-				"An orb of spontaneous regeneration.", 99);
+		Gear orbOfSpontaneousReanimation = 
+				gearFactory.buildSpontaneousReanimationOrb();
 		world.addGearToWorld(orbOfSpontaneousReanimation, hiveBroodTunnelCave);
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Plasma McCannon",
-								"(An inductive weapon which directly proves your enemies to be a pile of ash, beyond "
-										+ "contradiction.)", 5, 25),
+						gearFactory.buildPlasmaMcCannon(),
 						brokenCargoPod);
 
 		world
 				.addGearToWorld(
-						new Armor(
-								"Assault SNO Cuirass",
-								"(Despite it's requirements to withstand orbital strikes, this armor appears to "
-										+ "be a composite, made out of strange glowing rectangles connected by dotted lines "
-										+ "in some technological pattern.)", 3,
-								'H'), cave);
+						gearFactory.buildAssaultCuirass(), cave);
 
 		world
 				.addGearToWorld(
-						new Weapon(
-								"Malign Pattern",
-								"(While initially appearing to be a sheet of paper with glittering silicon traces, "
-										+ "A Dreadnaught with enough strength could bend this simple paper into an epic "
-										+ "Origami Vibro-Blade.)", 5, 35),
+						gearFactory.buildMallignPattern(),
 						hiveQueensLair);
 
 		// Add mobs.
