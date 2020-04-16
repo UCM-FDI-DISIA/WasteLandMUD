@@ -1,14 +1,40 @@
 package world.creation;
 
+import world.Agressive;
+import world.Greets;
 import world.Mobile;
+import world.Mutters;
+import world.PassiveAgressive;
 import world.Room;
 import world.Strategy;
-import world.World;
 
 public class MobileFactory {
+	
+	public static Strategy buildStrategy(String whichStrategy, String message4strategy, Mobile temp) {
+		
+		Strategy specificStrategy = null;
+		
+		switch(whichStrategy) {
+			case "G": 
+				specificStrategy = new Greets();
+				break;
 
-	public MobileFactory() {
-		// TODO Auto-generated constructor stub
+			case "PA": 
+				specificStrategy = new PassiveAgressive();
+				break;
+
+			case "A": 
+				specificStrategy = new Agressive();
+				break;
+
+			case "M": 
+				Mutters m = new Mutters(message4strategy);
+				m.setMobile(temp);
+				specificStrategy = m;				
+				break;		
+		}
+		
+		return specificStrategy;		
 	}
 
 	/**
@@ -29,12 +55,14 @@ public class MobileFactory {
 	 * 
 	 * @return The created MOB, or null if duplicate
 	 */
-	public Mobile createMobile(String name, String description, Room room,
-			Strategy strategy) {
+	public static Mobile createMobile(String name, String description, Room room,
+			String whichStrategy, String message4strategy) {
 		
 		Mobile temp = new Mobile(name);
+		
+		Strategy specificStrategy = buildStrategy(whichStrategy, message4strategy, temp);		
 
-		temp.setStrategy(strategy);
+		temp.setStrategy(specificStrategy);
 		temp.setLocation(room);
 		temp.moveToRoom(room);
 		temp.setStart(room);
@@ -42,5 +70,4 @@ public class MobileFactory {
 		
 		return temp;
 	}
-
 }

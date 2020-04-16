@@ -238,6 +238,20 @@ public class World implements Runnable {
 		return null;
 	}
 
+	public Mobile createMobile(Mobile temp) {
+
+		if (this.nameExists(temp.getName().toLowerCase()))
+			return null;
+		if (this.mobiles.put(temp.getName().toLowerCase(), temp) == null) {
+			World.getInstance().addToWorld(temp);
+			
+			return temp;
+		}
+
+		return null;
+	}
+
+
 	/**
 	 * addGearToWorld is called to add a piece of gear to the world in a
 	 * specific location. It needs to take in a gear reference and a location.

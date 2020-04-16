@@ -186,9 +186,4 @@ public class MobileFactory0 {
 
 		return alienQueen;
 	}
-
-
-	
-
-
 }

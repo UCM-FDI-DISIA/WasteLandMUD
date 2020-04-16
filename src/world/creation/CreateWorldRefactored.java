@@ -29,7 +29,7 @@ public class CreateWorldRefactored {
 	OrbFactory orbFactory;
 	ArmorFactory armorFactory;
 	
-	MobileFactory0 mobileFactory;
+	MobileFactory1 mobileFactory;
 	
 	public CreateWorldRefactored() {
 		gearFactory = new GearFactory();	
@@ -37,7 +37,7 @@ public class CreateWorldRefactored {
 		orbFactory = new OrbFactory();
 		armorFactory = new ArmorFactory();
 		
-		mobileFactory = new MobileFactory0();
+		mobileFactory = new MobileFactory1();
 	}
 
 
@@ -728,41 +728,41 @@ public class CreateWorldRefactored {
 		
 
 		Mobile marine = mobileFactory.buildMarine(campSquare);
-		world.addToWorld(marine);
+		world.createMobile(marine);
 
 		Mobile rover = mobileFactory.buildRover(landingPad);
-		world.addToWorld(rover);
+		world.createMobile(rover);
 
 		Mobile sandCat = mobileFactory.buildSandCat(landingPad);
-		world.addToWorld(sandCat);
+		world.createMobile(sandCat);
 		
 		Mobile giantScorpion = mobileFactory.buildGiantScorpion(cave);
-		world.addToWorld(giantScorpion);
+		world.createMobile(giantScorpion);
 
 
 		Mobile smallScorpion = mobileFactory.buildSmallScorpion(nearWaste);
-		world.addToWorld(smallScorpion);
+		world.createMobile(smallScorpion);
 
 		Mobile mediumScorpion = mobileFactory.buildMediumScorpion(canyon);
-		world.addToWorld(mediumScorpion);
+		world.createMobile(mediumScorpion);
 		
 
 		Mobile lurker = mobileFactory.buildLurker(cargoPod);
-		world.addToWorld(lurker);
+		world.createMobile(lurker);
 		
 		Mobile hiveScout = mobileFactory.buildHiveScout(hiveApproach);
-		world.addToWorld(hiveScout);
+		world.createMobile(hiveScout);
 
 		Mobile hiveDrone = mobileFactory.buildHiveDrone(hiveApproach);
-		world.addToWorld(hiveDrone);
+		world.createMobile(hiveDrone);
 		
 		Mobile hiveGuardian = mobileFactory.buildHiveGuardian(hivePerimeter);
-		world.addToWorld(hiveGuardian);
+		world.createMobile(hiveGuardian);
 
 		Mobile hiveWorker = mobileFactory.buildHiveGuardian(hivePerimeter);
-		world.addToWorld(hiveWorker);
+		world.createMobile(hiveWorker);
 
 		Mobile alienQueen = mobileFactory.buildHiveGuardian(hiveQueensLair);
-		world.addToWorld(alienQueen);
+		world.createMobile(alienQueen);
 	}
 }
