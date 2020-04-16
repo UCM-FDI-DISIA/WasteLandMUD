@@ -28,10 +28,12 @@ public class CreateWorldRefactored {
 	
 	GearFactory gearFactory;
 	WeaponFactory weaponFactory;
+	OrbFactory orbFactory;
 	
 	public CreateWorldRefactored() {
 		gearFactory = new GearFactory();	
 		weaponFactory = new WeaponFactory ();
+		orbFactory = new OrbFactory();
 	}
 
 	private World world = World.getInstance();
@@ -673,10 +675,10 @@ public class CreateWorldRefactored {
 
 		world
 				.addGearToWorld(
-						gearFactory.buildHealthOrb(), captainsDesk);
+						orbFactory.buildHealthOrb(), captainsDesk);
 		world
 				.addGearToWorld(
-						gearFactory.buildLongLifeOrb(), captainsDesk);
+						orbFactory.buildLongLifeOrb(), captainsDesk);
 
 		// Gear in the Wild
 
@@ -702,7 +704,7 @@ public class CreateWorldRefactored {
 		// Easter-Egg Gear
 
 		Gear orbOfSpontaneousReanimation = 
-				gearFactory.buildSpontaneousReanimationOrb();
+				orbFactory.buildSpontaneousReanimationOrb();
 		world.addGearToWorld(orbOfSpontaneousReanimation, hiveBroodTunnelCave);
 
 		world
