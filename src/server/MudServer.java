@@ -10,6 +10,9 @@ import world.CreateWorld;
 import world.World;
 import world.WorldNotFoundException;
 import world.creation.CreateWorldRefactored;
+import world.creation.builder.WorldBuilder;
+import world.creation.builder.WorldBuilderImpl;
+import world.creation.builder.WorldBuilderImpl2;
 
 /**
  * server.MudServer is the main server for our MUD. It will control all of the
@@ -58,8 +61,16 @@ public class MudServer {
 		try {
 			World.getInstance().loadWorld();
 		} catch (WorldNotFoundException e) {
+			// 0: original
 			//new CreateWorld().createWorld();
-			new CreateWorldRefactored().createWorld();
+			
+			// 1: Gear and Mobile as factory 
+			//new CreateWorldRefactored().createWorld();
+			
+			// 2: Gear and Mobile as factory, builder for Room 
+			//
+			WorldBuilder builder = new WorldBuilderImpl2();			
+			builder.buildWorld();	
 		}
 		
 		if (!World.getInstance().confirmPlayer(

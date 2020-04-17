@@ -593,7 +593,7 @@ Exit AH-BroodTunnelCave n AH-BroodTunnelFour
 
 
 Room AH
-Name The Hive: The Treacherous Hive.
+Name The Hive: The Treacherous Hive
 Description 
 You shouldn't be seeing this!
 END
