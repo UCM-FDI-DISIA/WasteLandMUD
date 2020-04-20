@@ -69,7 +69,7 @@ public class MudServer {
 			
 			// 2: Gear and Mobile as factory, builder for Room 
 			//
-			WorldBuilder builder = new WorldBuilderImpl2();			
+			WorldBuilder builder = new WorldBuilderImpl();			
 			builder.buildWorld();	
 		}
 		

@@ -7,6 +7,13 @@ import java.nio.file.Paths;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 
+import world.Armor;
+import world.GearContainer;
+import world.HealthOrb;
+import world.Mobile;
+import world.Room;
+import world.Weapon;
+
 public class WorldDataParser {
 	
 	WorldBuilder builder;
@@ -34,6 +41,10 @@ public class WorldDataParser {
 		while(st.hasMoreTokens()) {
 			String line = st.nextToken();
 			
+			System.out.println("LINE: "+ line);
+			
+			//  Room structure
+			
 			if(line.startsWith("Room")) {
 				this.buildRoom(line, st);				
 			}
@@ -44,7 +55,33 @@ public class WorldDataParser {
 
 			if(line.startsWith("ADD")) {
 				this.nestInstruction(line);				
+			}	
+			
+			//  Gear			
+
+			if(line.startsWith("Weapon")) {
+				this.buildWeapon(st);				
+			}		
+
+			if(line.startsWith("Armor")) {
+				this.buildArmor(st);				
+			}
+
+			if(line.startsWith("Orb")) {
+				this.buildOrb(st);		
+			}
+
+
+			if(line.startsWith("GearContainer")) {
+				this.buildGearContainer(st);		
 			}			
+			
+			// Mobile
+
+			if(line.startsWith("Mobile")) {
+				this.buildMobile(st);				
+			}
+			
 		}		
 	}
 	
@@ -83,6 +120,161 @@ public class WorldDataParser {
 		String room2 = st.nextToken();
 		
 		builder.nestRooms(room1, room2);		
+	}
+
+	private void buildWeapon(StringTokenizer st) {
+				
+		String name = st.nextToken().substring(5);
+		
+		StringBuffer description = new StringBuffer();
+		boolean finished = false;
+		while(st.hasMoreTokens() && !finished) {
+			String nextLine = st.nextToken();
+			finished = nextLine.equalsIgnoreCase("END");
+			if(!finished) {
+				description.append(nextLine);
+			}			
+		}
+		
+		String levelString = st.nextToken();
+		int level = Integer.parseInt(levelString.substring(6));
+		String damageString = st.nextToken();
+		int damage = Integer.parseInt(damageString.substring(7));
+		
+
+		String locationString = st.nextToken();
+		String where = locationString.substring(9);
+				
+		Weapon weapon = ElementFactory.buildWeapon(name, description.toString(), level, damage);
+		
+		builder.addGear(where, weapon);		
+
+		System.out.println("Added " + weapon.getName() + " to " + where);
+	}
+
+	private void buildArmor(StringTokenizer st) {
+				
+		String name = st.nextToken().substring(5);
+		
+		StringBuffer description = new StringBuffer();
+		boolean finished = false;
+		while(st.hasMoreTokens() && !finished) {
+			String nextLine = st.nextToken();
+			finished = nextLine.equalsIgnoreCase("END");
+			if(!finished) {
+				description.append(nextLine);
+			}			
+		}
+		
+		String levelString = st.nextToken();
+		int level = Integer.parseInt(levelString.substring(6));
+		String damageString = st.nextToken();
+		char type = damageString.substring(5).charAt(0);
+		
+
+		String locationString = st.nextToken();
+		String where = locationString.substring(9);
+				
+		Armor armor = ElementFactory.buildArmor(name, description.toString(), level, type);
+		
+		builder.addGear(where, armor);		
+
+		System.out.println("Added " + armor.getName() + " to " + where);
+	}
+
+	private void buildOrb(StringTokenizer st) {
+				
+		String name = st.nextToken().substring(5);
+		
+		StringBuffer description = new StringBuffer();
+		boolean finished = false;
+		while(st.hasMoreTokens() && !finished) {
+			String nextLine = st.nextToken();
+			finished = nextLine.equalsIgnoreCase("END");
+			if(!finished) {
+				description.append(nextLine);
+			}			
+		}
+		
+		String levelString = st.nextToken();
+		int healthPoints = Integer.parseInt(levelString.substring(13));
+
+		String locationString = st.nextToken();
+		String where = locationString.substring(9);
+				
+		HealthOrb orb = ElementFactory.buildHealthOrb(name, description.toString(), healthPoints);
+		
+		builder.addGear(where, orb);		
+
+		System.out.println("Added " + orb.getName() + " to " + where);
+	}
+
+	private void buildGearContainer(StringTokenizer st) {
+				
+		String name = st.nextToken().substring(5);
+		
+		StringBuffer description = new StringBuffer();
+		boolean finished = false;
+		while(st.hasMoreTokens() && !finished) {
+			String nextLine = st.nextToken();
+			finished = nextLine.equalsIgnoreCase("END");
+			if(!finished) {
+				description.append(nextLine);
+			}			
+		}
+		
+		String maxSizeString = st.nextToken();
+		int maxSize = Integer.parseInt(maxSizeString.substring(8));
+		
+		String canCarryString = st.nextToken();
+		String canCarryShort = canCarryString.substring(9);
+		boolean canCarry = Boolean.parseBoolean(canCarryShort);
+
+		String locationString = st.nextToken();
+		String where = locationString.substring(9);
+				
+		GearContainer container = ElementFactory.buildGearContainer(name, description.toString(), maxSize, canCarry);
+		
+		builder.addGear(where, container);		
+
+		System.out.println("Added " + container.getName() + " to " + where);
+	}
+
+	private void buildMobile(StringTokenizer st) {
+				
+		String name = st.nextToken().substring(5);
+		
+		StringBuffer description = new StringBuffer();
+		boolean finished = false;
+		while(st.hasMoreTokens() && !finished) {
+			String nextLine = st.nextToken();
+			finished = nextLine.equalsIgnoreCase("END");
+			if(!finished) {
+				description.append(nextLine);
+			}			
+		}
+		
+		String strategyString = st.nextToken();
+		
+		StringTokenizer stStrategy = new StringTokenizer(strategyString," ");
+		
+		stStrategy.nextToken();
+		
+		String strategy = stStrategy.nextToken();
+		String message4strategy = "";
+		
+		if(stStrategy.hasMoreTokens()) {
+			message4strategy = stStrategy.nextToken();
+		}
+
+		String locationString = st.nextToken();
+		String where = locationString.substring(9);
+		
+		Mobile mobile = MobileFactory.createMobile(name, description.toString(), strategy, message4strategy);
+			
+		System.out.println("Buit mobile " + mobile.getName());
+		
+		builder.addMobile(where, mobile);
 	}
 
     private String readLineByLineJava8(String filePath) {

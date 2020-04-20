@@ -1,0 +1,7 @@
+Mobile ODMarine
+Name Off-Duty Marine
+Description 
+An off duty marine.
+END
+Strategy G
+Location BC-CampSquare

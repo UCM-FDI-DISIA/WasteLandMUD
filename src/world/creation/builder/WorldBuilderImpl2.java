@@ -203,4 +203,16 @@ public class WorldBuilderImpl2 implements WorldBuilder {
 		Room room2 = roomSet.get(roomWithin);
 		room1.add(room2);		
 	}
+
+	@Override
+	public void addGear(String where, Object gear) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addMobile(String where, Object mobile) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -1,6 +1,5 @@
 package world.creation.builder;
 
-import world.Direction;
 import world.World;
 
 public interface WorldBuilder {
@@ -14,4 +13,8 @@ public interface WorldBuilder {
 	public void buildExit(String roomFrom, String whichWay, String roomTo);
 	
 	public void nestRooms(String outerRoom, String roomWithin);
+	
+	public void addGear(String where, Object gear);
+
+	public void addMobile(String where, Object mobile);
 }
