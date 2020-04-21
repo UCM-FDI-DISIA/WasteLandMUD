@@ -11,7 +11,6 @@ import world.Armor;
 import world.GearContainer;
 import world.HealthOrb;
 import world.Mobile;
-import world.Room;
 import world.Weapon;
 
 public class WorldDataParser {
@@ -41,7 +40,7 @@ public class WorldDataParser {
 		while(st.hasMoreTokens()) {
 			String line = st.nextToken();
 			
-			System.out.println("LINE: "+ line);
+			//System.out.println("LINE: "+ line);
 			
 			//  Room structure
 			
@@ -81,7 +80,10 @@ public class WorldDataParser {
 			if(line.startsWith("Mobile")) {
 				this.buildMobile(st);				
 			}
-			
+
+			if(line.startsWith("Stat")) {
+				this.updateStat(line);			
+			}			
 		}		
 	}
 	
@@ -146,6 +148,9 @@ public class WorldDataParser {
 		String where = locationString.substring(9);
 				
 		Weapon weapon = ElementFactory.buildWeapon(name, description.toString(), level, damage);
+
+
+		//System.out.println("Created " + weapon.getName());
 		
 		builder.addGear(where, weapon);		
 
@@ -272,9 +277,25 @@ public class WorldDataParser {
 		
 		Mobile mobile = MobileFactory.createMobile(name, description.toString(), strategy, message4strategy);
 			
-		System.out.println("Buit mobile " + mobile.getName());
+		//System.out.println("Buit mobile " + mobile.getName());
 		
 		builder.addMobile(where, mobile);
+	}
+
+	private void updateStat(String line) {
+		
+		StringTokenizer st = new StringTokenizer(line," ");
+		
+		st.nextToken();
+		
+		String name = st.nextToken();
+
+		String trait = st.nextToken();
+
+		String valueString = st.nextToken();
+		int value = Integer.parseInt(valueString);
+		
+		builder.addStatToMobile(name, trait, value);
 	}
 
     private String readLineByLineJava8(String filePath) {

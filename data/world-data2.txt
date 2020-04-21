@@ -27,6 +27,9 @@ END
 Strategy M Sand Cat burrows into the ground, leaving a raised trail in the earth.
 Location BC-LandingPad
 
+Stat Sand_Cat Strength 2
+Stat Sand_Cat Agility 10
+
 Room BC-CampSquare
 Name Base Camp: Camp Square
 Description 
@@ -201,6 +204,17 @@ END
 Exit BC-CampGate n WL-NearWastes
 Exit WL-NearWastes s BC-CampGate
 
+Mobile
+Name Small Scorpion
+Description 
+A small scorpion the likes of which you've likely seen before.
+END
+Strategy PA
+Location WL-NearWastes
+Stat Small_Scorpion Strength 2
+Stat Small_Scorpion Agility 7
+Stat Small_Scorpion MAXHITPOINTS 15
+
 Room WL-Wasteland
 Name Wastelands: The Wasteland
 Description 
@@ -278,6 +292,16 @@ Level 3
 Type H
 Location WL-Cave
 
+Mobile
+Name Giant Scorpion
+Description 
+A giant scorpion the likes of which the world has never seen.
+END
+Strategy PA
+Location WL-Cave
+Stat Giant_Scorpion Strength 40
+Stat Giant_Scorpion Agility 3
+
 Room WL-Canyon
 Name Wastelands: Canyon
 Description 
@@ -287,6 +311,17 @@ END
 
 Exit WL-CaveMouth n WL-Canyon
 Exit WL-Canyon s WL-CaveMouth
+
+Mobile
+Name Medium Scorpion
+Description 
+A medium scorpion the likes of which you've likely seen before.
+END
+Strategy PA
+Location WL-Canyon
+Stat Medium_Scorpion Strength 3
+Stat Medium_Scorpion Agility 8
+Stat Medium_Scorpion MAXHITPOINTS 16
 
 Room WL-Cavern
 Name Wastelands: Cavern
@@ -395,6 +430,17 @@ END
 Level 1
 Type L
 Location CS-BrokenCargoPod
+
+Mobile
+Name Lurker
+Description 
+A monstrous spider-like creature, whose fangs drip acid.
+END
+Strategy PA
+Location CS-BrokenCargoPod
+Stat Lurker Strength 6
+Stat Lurker Agility 6
+Stat Lurker MAXHITPOINTS 25
 
 Room CS-NorthSpinalCorridor
 Name Crashed Ship: North Spinal Corridor
@@ -619,6 +665,34 @@ END
 Exit TM-TreacherousTrail w AH-Approach
 Exit AH-Approach e TM-TreacherousTrail
 
+Mobile
+Name Hive Scout
+Description 
+A strange creature, like an eight-legged dog with 
+dozens of solid red eyes, and chitinous body-segmets 
+that turn into a whiplike tail.
+END
+Strategy PA
+Location AH-Approach
+Stat Hive_Scout Strength 4
+Stat Hive_Scout Agility 8
+Stat Hive_Scout MAXHITPOINTS 25
+Stat Hive_Scout TOUGHNESS 3
+
+Mobile
+Name Hive Drone
+Description 
+A strange creature, like an eight-legged dog with 
+a white face, dozens of solid red eyes, and chitinous body-segmets 
+that turn into a whiplike tail.
+END
+Strategy PA
+Location AH-Approach
+Stat Hive_Drone Strength 4
+Stat Hive_Drone Agility 8
+Stat Hive_Drone MAXHITPOINTS 15
+Stat Hive_Drone TOUGHNESS 3
+
 Room AH-Perimeter
 Name Alien Hive: Perimeter
 Description 
@@ -631,6 +705,29 @@ END
 
 Exit AH-Perimeter e AH-Approach
 Exit AH-Approach w AH-Perimeter
+
+Mobile
+Name Hive Guardian
+Description 
+A strange armored beast, like a six-legged rhino with long talons and angry teeth.
+END
+Strategy A
+Location AH-Perimeter
+Stat Hive_Guardian Strength 9
+Stat Hive_Guardian Agility 6
+Stat Hive_Guardian MAXHITPOINTS 40
+Stat Hive_Guardian TOUGHNESS 7
+
+Mobile
+Name Hive Worker
+Description 
+A strange insectile creature with the body of a gorilla and thick armored plates moves about.
+END
+Strategy M A Hive Worker uses it's mandibles to gnaw a thick chunk of organic material out of the wall, and take it deeper into the hive before returning.
+Location AH-Perimeter
+Stat Hive_Guardian Strength 9
+Stat Hive_Guardian Agility 2
+Stat Hive_Guardian MAXHITPOINTS 40
 
 Room AH-Cathedral
 Name Alien Hive: Cathedral
@@ -678,6 +775,20 @@ END
 Level 5
 Damage 35
 Location AH-Queen'sLair
+
+Mobile
+Name Alien Queen
+Description 
+This enormous creature has a bulbous body and thousands of legs, and a vaguely face-like 
+construct filled with fangs and glittering ruby eyes. and often leaves dripping eggs in 
+it's wake as it meanders through it's deep chamber.
+END
+Strategy A
+Location AH-Queen'sLair
+Stat Alien_Queen Strength 16
+Stat Alien_Queen Agility 6
+Stat Alien_Queen MAXHITPOINTS 200
+Stat Alien_Queen TOUGHNESS 8
 
 
 Room AH-HiddenTrail

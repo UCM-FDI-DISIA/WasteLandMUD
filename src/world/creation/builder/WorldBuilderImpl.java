@@ -8,6 +8,7 @@ import world.Gear;
 import world.GearContainer;
 import world.Mobile;
 import world.Room;
+import world.Trait;
 import world.World;
 
 public class WorldBuilderImpl implements WorldBuilder {
@@ -107,13 +108,73 @@ public class WorldBuilderImpl implements WorldBuilder {
 			if(mobile instanceof Mobile) {
 				Mobile mobileRep = (Mobile)mobile;
 				mobileSet.put(mobileRep.getName(), mobileRep);
-				
+
+				//System.out.println(mobileRep.getName() + " created, now adding to room.");
 
 				mobileRep.setLocation(room);
 				mobileRep.moveToRoom(room);
 				mobileRep.setStart(room);
 
-				room.add(mobileRep);			}
+				//room.add(mobileRep);	
+			}
 		}		
 	}
+
+	@Override
+	public void addStatToMobile(String name, String trait, int value) {
+
+		Mobile mobileRep = mobileSet.get(name);
+
+		Trait thisOne = this.identifyTrait(trait);
+		
+		mobileRep.setStat(value,thisOne);
+	}
+	
+	private Trait identifyTrait(String trait) {
+		
+		Trait thisOne = null;
+		
+		if(trait.equalsIgnoreCase("agility")) {
+			 thisOne = Trait.AGILITY;			
+		}
+
+		if(trait.equalsIgnoreCase("agility")) {
+			 thisOne = Trait.AGILITY;			
+		}
+
+		if(trait.equalsIgnoreCase("agility")) {
+			 thisOne = Trait.AGILITY;			
+		}
+
+		if(trait.equalsIgnoreCase("STRENGTH")) {
+			 thisOne = Trait.STRENGTH;			
+		}
+
+		if(trait.equalsIgnoreCase("TOUGHNESS")) {
+			 thisOne = Trait.TOUGHNESS;			
+		}
+
+		if(trait.equalsIgnoreCase("INTELLECT")) {
+			 thisOne = Trait.INTELLECT;			
+		}
+
+		if(trait.equalsIgnoreCase("HITPOINTS")) {
+			 thisOne = Trait.HITPOINTS;			
+		}
+
+		if(trait.equalsIgnoreCase("MAXHITPOINTS")) {
+			 thisOne = Trait.MAXHITPOINTS;			
+		}
+
+		if(trait.equalsIgnoreCase("TECHNIQUE")) {
+			 thisOne = Trait.TECHNIQUE;			
+		}
+
+		if(trait.equalsIgnoreCase("MAXTECHNIQUE")) {
+			 thisOne = Trait.MAXTECHNIQUE;			
+		}
+		
+		return thisOne;		
+	}
 }
+

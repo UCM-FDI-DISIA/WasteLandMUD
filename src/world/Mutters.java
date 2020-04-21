@@ -42,6 +42,7 @@ public class Mutters extends Strategy implements Runnable {
 	@Override
 	public void onRoomChange() {
 		// TODO not impplemented yet.
+		//System.out.println(this.mobile.getName() + " changes room.");
 
 	}
 

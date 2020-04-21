@@ -17,4 +17,6 @@ public interface WorldBuilder {
 	public void addGear(String where, Object gear);
 
 	public void addMobile(String where, Object mobile);
+
+	public void addStatToMobile(String name, String trait, int value);
 }

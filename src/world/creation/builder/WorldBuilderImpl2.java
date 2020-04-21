@@ -215,4 +215,10 @@ public class WorldBuilderImpl2 implements WorldBuilder {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void addStatToMobile(String name, String trait, int value) {
+		// TODO Auto-generated method stub
+		
+	}
 }
