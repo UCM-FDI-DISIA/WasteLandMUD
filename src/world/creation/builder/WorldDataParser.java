@@ -15,14 +15,32 @@ import world.Weapon;
 
 public class WorldDataParser {
 	
-	WorldBuilder builder;
+	String path;
+	
+	ElementFactory elementFactory;
+	
+	MobileFactory mobileFactory;	
+	
+	WorldBuilder builder;	
 	
 	public WorldDataParser() {
 		
+		elementFactory = new ElementFactoryImpl();	
+		
+		mobileFactory = new MobileFactoryImpl();
 	}
 
 	public WorldDataParser(WorldBuilder build) {
 		builder = build;		
+	}
+
+	public WorldDataParser(String fileAddress, WorldBuilder build) {
+		path = fileAddress;
+		builder = build;		
+	}
+	
+	public void construct() {
+		this.parseFile(path);
 	}
 	
 	public void parseFile(String fileAddress) {
@@ -147,7 +165,7 @@ public class WorldDataParser {
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
 				
-		Weapon weapon = ElementFactory.buildWeapon(name, description.toString(), level, damage);
+		Weapon weapon = elementFactory.buildWeapon(name, description.toString(), level, damage);
 
 
 		//System.out.println("Created " + weapon.getName());
@@ -180,7 +198,7 @@ public class WorldDataParser {
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
 				
-		Armor armor = ElementFactory.buildArmor(name, description.toString(), level, type);
+		Armor armor = elementFactory.buildArmor(name, description.toString(), level, type);
 		
 		builder.addGear(where, armor);		
 
@@ -207,7 +225,7 @@ public class WorldDataParser {
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
 				
-		HealthOrb orb = ElementFactory.buildHealthOrb(name, description.toString(), healthPoints);
+		HealthOrb orb = elementFactory.buildHealthOrb(name, description.toString(), healthPoints);
 		
 		builder.addGear(where, orb);		
 
@@ -238,7 +256,7 @@ public class WorldDataParser {
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
 				
-		GearContainer container = ElementFactory.buildGearContainer(name, description.toString(), maxSize, canCarry);
+		GearContainer container = elementFactory.buildGearContainer(name, description.toString(), maxSize, canCarry);
 		
 		builder.addGear(where, container);		
 
@@ -275,7 +293,7 @@ public class WorldDataParser {
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
 		
-		Mobile mobile = MobileFactory.createMobile(name, description.toString(), strategy, message4strategy);
+		Mobile mobile = mobileFactory.createMobile(name, description.toString(), strategy, message4strategy);
 			
 		//System.out.println("Buit mobile " + mobile.getName());
 		

@@ -5,25 +5,27 @@ import world.Room;
 import world.Trait;
 
 public class MobileFactory1 {
+	
+	MobileFactory factory;
 
 	public MobileFactory1() {
-		// TODO Auto-generated constructor stub
+		factory = new MobileFactoryImpl();
 	}
 	
 	public Mobile buildMarine(Room location) {
 		
-		return MobileFactory.createMobile("Off-Duty Marine", "An off duty marine.", location, "G", "");
+		return factory.createMobile("Off-Duty Marine", "An off duty marine.", location, "G", "");
 	}
 
 	public Mobile buildRover(Room location) {
 		
-		return MobileFactory.createMobile("Rover", "A mechanical dog.", location, "M", "Rover Woofs!");
+		return factory.createMobile("Rover", "A mechanical dog.", location, "M", "Rover Woofs!");
 	}
 	
 	public Mobile buildSandCat(Room location) {
 		
 		Mobile sandCat = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Sand Cat", 
 						"Not exactly a feline, but this sleek, "
 								+ "hard to catch creature is similar to a housecat in shape. "
@@ -40,7 +42,7 @@ public class MobileFactory1 {
 
 	public Mobile buildGiantScorpion(Room location) {
 		Mobile giantScorpion = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Giant Scorpion",
 						"A giant scorpion the likes of which the world has never seen.",
 						location, 
@@ -55,7 +57,7 @@ public class MobileFactory1 {
 
 	public Mobile buildSmallScorpion(Room location) {
 		Mobile smallScorpion =
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Small Scorpion",
 						"A small scorpion the likes of which you've likely seen before.",
 						location, 
@@ -71,7 +73,7 @@ public class MobileFactory1 {
 
 	public Mobile buildMediumScorpion(Room location) {
 		Mobile mediumScorpion =
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Medium Scorpion",
 						"A medium scorpion the likes of which you've likely seen before.",
 						location, 
@@ -88,7 +90,7 @@ public class MobileFactory1 {
 
 	public Mobile buildLurker(Room location) {
 		Mobile lurker = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Lurker",
 						"A monstrous spider-like creature, whose fangs drip acid.",
 						location, 
@@ -103,7 +105,7 @@ public class MobileFactory1 {
 
 	public Mobile buildHiveScout(Room location) {
 		Mobile hiveScout = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Hive Scout",
 						"A strange creature, like an eight-legged dog with "
 								+ "dozens of solid red eyes, and chitinous body-segmets "
@@ -123,7 +125,7 @@ public class MobileFactory1 {
 
 	public Mobile buildHiveDrone(Room location) {
 		Mobile hiveDrone = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Hive Scout",
 						"A strange creature, like an eight-legged dog with "
 								+ "dozens of solid red eyes, and chitinous body-segmets "
@@ -142,7 +144,7 @@ public class MobileFactory1 {
 
 	public Mobile buildHiveGuardian(Room location) {
 		Mobile hiveGuardian = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Hive Guardian",
 						"A strange armored beast, like a six-legged rhino with long talons and angry teeth.",
 						location, 
@@ -159,7 +161,7 @@ public class MobileFactory1 {
 
 	public Mobile buildHiveWorker(Room location) {
 		Mobile hiveWorker = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Hive Worker",
 						"A strange insectile creature with the body of a gorilla and thick armored plates moves about ",
 						location,
@@ -177,7 +179,7 @@ public class MobileFactory1 {
 
 	public Mobile buildAllienQueen(Room location) {
 		Mobile alienQueen = 
-				MobileFactory.createMobile(
+				factory.createMobile(
 						"Alien Queen",
 						"This enormous creature has a bulbous body and thousands of legs, and a vaguely face-like "
 								+ "construct filled with fangs and glittering ruby eyes. and often leaves dripping eggs in "

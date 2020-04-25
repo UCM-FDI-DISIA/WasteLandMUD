@@ -13,6 +13,7 @@ import world.creation.CreateWorldRefactored;
 import world.creation.builder.WorldBuilder;
 import world.creation.builder.WorldBuilderImpl;
 import world.creation.builder.WorldBuilderImpl2;
+import world.creation.builder.WorldDataParser;
 
 /**
  * server.MudServer is the main server for our MUD. It will control all of the
@@ -64,13 +65,16 @@ public class MudServer {
 			// 0: original
 			//new CreateWorld().createWorld();
 			
-			// 1: Gear and Mobile as factory 
-			//new CreateWorldRefactored().createWorld();
+			// Builder pattern
+			WorldBuilder builder = new WorldBuilderImpl();
+			WorldDataParser parser = new WorldDataParser("data/world-data2.txt",builder);
+			parser.construct();
 			
-			// 2: Gear and Mobile as factory, builder for Room 
-			//
-			WorldBuilder builder = new WorldBuilderImpl();			
-			builder.buildWorld();	
+			// not really necessary (due to World being a Singleton) 
+			//    but added for completeness of the pattern
+			
+			//World world = builder.getWorld();
+			
 		}
 		
 		if (!World.getInstance().confirmPlayer(
