@@ -1,8 +1,8 @@
-package world.creation.builder.test;
+package world.creation.factorymethod.test;
 
 import world.Weapon;
-import world.creation.builder.ElementFactory;
-import world.creation.builder.ElementFactoryImpl;
+import world.creation.factorymethod.ElementFactory;
+import world.creation.factorymethod.ElementFactoryImpl;
 
 public class ElementFactoryTest {
 

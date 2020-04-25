@@ -1,4 +1,4 @@
-package world.creation;
+package world.creation.factorymethod;
 
 import world.Agressive;
 import world.Greets;

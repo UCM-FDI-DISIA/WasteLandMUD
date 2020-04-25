@@ -12,6 +12,10 @@ import world.GearContainer;
 import world.HealthOrb;
 import world.Mobile;
 import world.Weapon;
+import world.creation.factorymethod.ElementFactory;
+import world.creation.factorymethod.ElementFactoryImpl;
+import world.creation.factorymethod.MobileFactory;
+import world.creation.factorymethod.MobileFactoryImpl;
 
 public class WorldDataParser {
 	

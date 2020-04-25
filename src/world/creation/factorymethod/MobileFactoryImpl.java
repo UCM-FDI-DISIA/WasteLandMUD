@@ -1,7 +1,6 @@
-package world.creation;
+package world.creation.factorymethod;
 
 import world.Mobile;
-import world.Room;
 import world.Strategy;
 
 public class MobileFactoryImpl implements MobileFactory {
@@ -9,6 +8,7 @@ public class MobileFactoryImpl implements MobileFactory {
 	public MobileFactoryImpl() {
 		
 	}
+	
 	
 	/**
 	 * createMobile is called when the MUD world is created. It will take in a
@@ -21,14 +21,12 @@ public class MobileFactoryImpl implements MobileFactory {
 	 *            The name for the MOB
 	 * @param description
 	 *            The description for the MOB
-	 * @param room
-	 *            The starting room for the MOB
 	 * @param strategy
 	 *            The strategy for the specific MOB
 	 * 
 	 * @return The created MOB, or null if duplicate
 	 */
-	public Mobile createMobile(String name, String description, Room room,
+	public Mobile createMobile(String name, String description, 
 			String whichStrategy, String message4strategy) {
 		
 		Mobile temp = new Mobile(name);
@@ -36,9 +34,6 @@ public class MobileFactoryImpl implements MobileFactory {
 		Strategy specificStrategy = StrategyEncoder.buildStrategy(whichStrategy, message4strategy, temp);		
 
 		temp.setStrategy(specificStrategy);
-		temp.setLocation(room);
-		temp.moveToRoom(room);
-		temp.setStart(room);
 		temp.setDescription(description);
 		
 		return temp;

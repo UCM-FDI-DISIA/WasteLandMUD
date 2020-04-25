@@ -1,4 +1,4 @@
-package world.creation.builder;
+package world.creation.factorymethod;
 
 import world.Mobile;
 

@@ -28,14 +28,6 @@ public class WorldBuilderImpl implements WorldBuilder {
 	}
 
 	@Override
-	public void buildWorld() {
-		
-		WorldDataParser parser = new WorldDataParser(this);
-		
-		parser.parseFile("data/world-data2.txt");
-	}
-
-	@Override
 	public World getWorld() {
 		return worldBeingBuilt;
 	}
