@@ -68,11 +68,13 @@ public class MudServer {
 			parser.construct();
 			
 			// not really necessary (due to World being a Singleton) 
-			//    but added for completeness of the pattern
+			//    originally added for completeness of the pattern
+			// now being used to compile the Location composite
 			
-			//World world = builder.getWorld();
-			
+			builder.getWorld();			
 		}
+		
+		System.out.println(World.getInstance().getWorldEntity());
 		
 		if (!World.getInstance().confirmPlayer(
 				"administrator", "password")) {

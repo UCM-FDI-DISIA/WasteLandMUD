@@ -35,10 +35,12 @@ public class WorldDataParser {
 	}
 
 	public WorldDataParser(WorldBuilder build) {
+		this();
 		builder = build;		
 	}
 
 	public WorldDataParser(String fileAddress, WorldBuilder build) {
+		this();
 		path = fileAddress;
 		builder = build;		
 	}

@@ -86,6 +86,14 @@ ADD BC BC-CampSquare
 ADD BC BC-CampGate
 
 
+Room WorldEntity
+Name OverachingWorld
+Description 
+All locations in the world are held here.
+END
+
+ADD WorldEntity BC
+
 Room BC-LandingPadBunker
 Name Base Camp: Landing Pad Bunker
 Description 
@@ -364,6 +372,8 @@ ADD WL WL-Canyon
 ADD WL WL-Cavern
 ADD WL WL-Lookout
 
+ADD WorldEntity WL
+
 Room CS-BrokenCargoPod
 Name Crashed Ship: Broken Cargo Pod
 Description 
@@ -491,6 +501,8 @@ ADD CS CS-BrokenCargoPod
 ADD CS CS-NorthSpinalCorridor
 ADD CS CS-SouthSpinalCorridor
 ADD CS CS-CargoPodNest
+
+ADD WorldEntity CS
 
 Room TM-Foothills
 Name The Mountains: Foothills
@@ -651,6 +663,27 @@ Exit TM-MazeCannyonE w TM-MazeCannyonC
 Exit TM-MazeCannyonNE s TM-MazeCannyonN
 Exit TM-MazeCannyonNE n TM-MazeCannyonSE
 Exit TM-MazeCannyonNE e TM-MazeCannyonNW
+
+
+Room TM
+Name The Maze environment room.
+Description 
+You shouldn't be seeing this!
+END
+
+ADD TM TM-MazeCannyonN
+ADD TM TM-MazeCannyonNE
+ADD TM TM-MazeCannyonE
+ADD TM TM-MazeCannyonSE
+ADD TM TM-MazeCannyonS
+ADD TM TM-MazeCannyonSW
+ADD TM TM-MazeCannyonW
+ADD TM TM-MazeCannyonNW
+ADD TM TM-MazeCannyonC
+ADD TM TM-Foothills
+ADD TM TM-TreacherousTrail
+
+ADD WorldEntity TM
 
 
 Room AH-Approach
@@ -877,7 +910,6 @@ Description
 You shouldn't be seeing this!
 END
 
-
 ADD AH AH-Approach w 
 ADD AH AH-Perimeter
 ADD AH AH-Cathedral
@@ -890,4 +922,6 @@ ADD AH AH-BroodTunnelTwo
 ADD AH AH-BroodTunnelThree
 ADD AH AH-BroodTunnelFour
 ADD AH AH-BroodTunnelCave
+
+ADD WorldEntity AH
 

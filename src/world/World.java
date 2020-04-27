@@ -9,6 +9,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
+import world.composite.Location;
+import world.composite.LocationCompiler;
+
 /**
  * World class will hold all of the objects that are contained in the world. It
  * will have an ArrayList of DatabaseObjects, each object will represent a
@@ -32,6 +35,8 @@ public class World implements Runnable {
 	private Map<String, Player> players = new HashMap<String, Player>();
 	private Map<String, Mobile> mobiles = new HashMap<String, Mobile>();
 	private Set<String> playersLoggedOn = new TreeSet<String>();
+	
+	Location worldEntity;
 
 	// This private constructor will initialize necessary variables.
 	private World() {
@@ -110,6 +115,14 @@ public class World implements Runnable {
 		return null;
 
 	}
+	
+	public void setWorldEntity(Location world) {
+		worldEntity = world;		
+	}
+
+	public Location getWorldEntity() {
+		return worldEntity;		
+	}
 
 	/**
 	 * This getPlayers() method returns a list of players.
@@ -158,20 +171,6 @@ public class World implements Runnable {
 	}
 
 	/**
-	 * This method is used to create Rooms, it creates a new room with the
-	 * passed name and adds it to the database.
-	 * 
-	 * @param name
-	 *            - A String that represents the name to give the room.
-	 * @return - A Room object, the new room created.
-	 */
-	public Room createRoom(String name) {
-		Room room = new Room(name);
-		this.addToWorld(room);
-		return room;
-	}
-
-	/**
 	 * The createPlayer(String,String) method creates a player and adds it to
 	 * the world.
 	 * 
@@ -197,45 +196,6 @@ public class World implements Runnable {
 		}
 
 		return temp;
-	}
-
-	/**
-	 * createMobile is called when the MUD world is created. It will take in a
-	 * string for a name, string as a description, a starting room and a
-	 * strategy for that specific MOB. If the MOB already exists it return null.
-	 * If it doesn't exist it will create a new MOB, add it to the current
-	 * world, set the strategy, and set the location.
-	 * 
-	 * @param name
-	 *            The name for the MOB
-	 * @param description
-	 *            The description for the MOB
-	 * @param room
-	 *            The starting room for the MOB
-	 * @param strategy
-	 *            The strategy for the specific MOB
-	 * 
-	 * @return The created MOB, or null if duplicate
-	 */
-	public Mobile createMobile(String name, String description, Room room,
-			Strategy strategy) {
-
-		if (this.nameExists(name.toLowerCase()))
-			return null;
-
-		Mobile temp = new Mobile(name);
-		if (this.mobiles.put(temp.getName().toLowerCase(), temp) == null) {
-			World.getInstance().addToWorld(temp);
-			temp.setStrategy(strategy);
-			temp.setLocation(room);
-			temp.moveToRoom(room);
-			temp.setStart(room);
-			temp.setDescription(description);
-			
-			return temp;
-		}
-
-		return null;
 	}
 
 	public Mobile createMobile(Mobile temp) {
@@ -377,6 +337,13 @@ public class World implements Runnable {
 			ObjectInputStream dIn = new ObjectInputStream(dFis);
 			this.databaseArray = (List<DatabaseObject>) dIn.readObject();
 			this.objectNumbers = this.databaseArray.size();
+			
+			// compiling Location composite
+			
+			LocationCompiler compiler = new LocationCompiler();			
+			Location worldComposite = compiler.compileWorld(this.databaseArray);
+			
+			this.setWorldEntity(worldComposite);
 
 			// load player list.
 			FileInputStream pFis = new FileInputStream(ROOTDIR

@@ -1,6 +1,8 @@
 package world.creation.builder;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import world.Direction;
@@ -10,6 +12,8 @@ import world.Mobile;
 import world.Room;
 import world.Trait;
 import world.World;
+import world.composite.Location;
+import world.composite.LocationCompiler;
 
 public class WorldBuilderImpl implements WorldBuilder {
 	
@@ -26,9 +30,16 @@ public class WorldBuilderImpl implements WorldBuilder {
 		
 		worldBeingBuilt = World.getInstance();
 	}
-
+	
 	@Override
 	public World getWorld() {
+		
+		LocationCompiler compiler = new LocationCompiler();
+		
+		Location worldComposite = compiler.compileWorld(roomSet);
+		
+		worldBeingBuilt.setWorldEntity(worldComposite);
+		
 		return worldBeingBuilt;
 	}
 
