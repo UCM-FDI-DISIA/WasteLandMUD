@@ -9,8 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.*;
 
-import world.composite.Location;
-import world.composite.LocationCompiler;
+import world.adapter.LocationCompiler;
+import world.composite.LocationCompositeCompiler;
+import world.location.Location;
+import world.location.LocationComp;
 
 /**
  * World class will hold all of the objects that are contained in the world. It
@@ -340,7 +342,7 @@ public class World implements Runnable {
 			
 			// compiling Location composite
 			
-			LocationCompiler compiler = new LocationCompiler();			
+			LocationComp compiler = new LocationCompositeCompiler();		
 			Location worldComposite = compiler.compileWorld(this.databaseArray);
 			
 			this.setWorldEntity(worldComposite);

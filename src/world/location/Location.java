@@ -1,4 +1,4 @@
-package world.composite;
+package world.location;
 
 import java.util.List;
 

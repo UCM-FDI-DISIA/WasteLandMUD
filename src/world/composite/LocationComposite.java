@@ -4,16 +4,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import world.Room;
+import world.location.Location;
 
-public class LocationAdapter implements Location {
-	
+public class LocationComposite implements Location {
+
 	Room room;
+	List<Location> nestedLocations;
 
-	public LocationAdapter() {
-
+	public LocationComposite() {
+		
+		nestedLocations = new LinkedList<Location>();		
 	}
 
-	public LocationAdapter(Room r) {
+	public LocationComposite(Room r) {
+		
+		this();
 
 		room = r;
 	}
@@ -29,26 +34,18 @@ public class LocationAdapter implements Location {
 
 	@Override
 	public void add(Location loc) {
-		
-		Room room2add = ((LocationAdapter)loc).getRoom();
-
-		room.add(room2add);		
+		nestedLocations.add(loc);
 	}
 
 	@Override
-	public void remove(Location loc) {
-		
-		Room room2remove = ((LocationAdapter)loc).getRoom();
-		
-		room.listRooms().remove(room2remove);		
+	public void remove(Location loc) {		
+		nestedLocations.remove(loc);		
 	}
 
 	@Override
 	public Location getChild(int which) {
-		
-		Room roomRequested = room.listRooms().get(which);
 
-		return new LocationAdapter(roomRequested);
+		return nestedLocations.get(which);
 	}
 	
 	@Override
@@ -60,28 +57,23 @@ public class LocationAdapter implements Location {
 	@Override
 	public List<Location> getChildren() {
 		
-		List<Location> locations = new LinkedList<Location>();
-		
-		
-		for(Room roomRequested : room.listRooms()) {
-			locations.add(new LocationAdapter(roomRequested));
-		}
-		
-		return locations;
+		return nestedLocations;
 	}
 
 	public String toString() {
 		
 		StringBuffer out = new StringBuffer();
-		
+
+		out.append("\n");
 		out.append(this.getName());
 
-		out.append(" [");
+		out.append("\n\t[\n");
 		
 		for(Location nested : this.getChildren()) {
 
+			out.append("\t\t");
 			out.append(nested.getName());
-			out.append(" ");
+			out.append("\n");
 		}
 
 		out.append("]\n");
@@ -93,4 +85,5 @@ public class LocationAdapter implements Location {
 		
 		return out.toString();
 	}
+
 }

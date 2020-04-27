@@ -1,21 +1,21 @@
-package world.composite;
+package world.adapter;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import world.DatabaseObject;
 import world.Room;
+import world.location.Location;
+import world.location.LocationAbstractCompiler;
 
-public class LocationCompiler {
+public class LocationCompiler extends LocationAbstractCompiler {
 	
-	List<Location> locations;
-
 	public LocationCompiler() {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public Location compileWorld( List<DatabaseObject> databaseArray) {
 		
 		locations = new LinkedList<Location>();		
@@ -42,6 +42,7 @@ public class LocationCompiler {
 		return locations.get(0);
 	}
 
+	@Override
 	public Location compileWorld(Map<String,Room> roomSet) {
 		
 		locations = new LinkedList<Location>();		
@@ -63,24 +64,5 @@ public class LocationCompiler {
 		}
 		
 		return locations.get(0);
-	}
-	
-	private Location findLocation4room(Room room) {
-		
-		boolean found = false;
-		
-		Location correspondingLocation = null;
-		
-		Iterator<Location> it = locations.iterator();
-		
-		while(it.hasNext() && !found) {
-			Location loc = it.next();
-			found = loc.getName().equalsIgnoreCase(room.getName());
-			if(found) {
-				correspondingLocation = loc;
-			}			
-		}
-		
-		return correspondingLocation;		
 	}
 }
