@@ -4,6 +4,7 @@ import java.util.List;
 
 import world.Room;
 import world.location.Location;
+import world.visitor.LocationVisitor;
 
 public class LocationLeaf implements Location {
 
@@ -33,6 +34,10 @@ public class LocationLeaf implements Location {
 		return room.generateDescription();
 	}
 
+	@Override
+	public void accept(LocationVisitor vis) {
+		vis.visit(this);				
+	}
 
 	public String toString() {
 		

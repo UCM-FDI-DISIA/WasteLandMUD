@@ -5,6 +5,7 @@ import java.util.List;
 
 import world.Room;
 import world.location.Location;
+import world.visitor.LocationVisitor;
 
 public class LocationAdapter implements Location {
 	
@@ -92,5 +93,11 @@ public class LocationAdapter implements Location {
 		}
 		
 		return out.toString();
+	}
+
+	@Override
+	public void accept(LocationVisitor vis) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -11,6 +11,7 @@ import world.WorldNotFoundException;
 import world.creation.builder.WorldBuilder;
 import world.creation.builder.WorldBuilderImpl;
 import world.creation.builder.WorldDataParser;
+import world.visitor.print.LocationPrintVisitor;
 
 /**
  * server.MudServer is the main server for our MUD. It will control all of the
@@ -73,8 +74,14 @@ public class MudServer {
 			
 			builder.getWorld();			
 		}
+
+		//System.out.println(World.getInstance().getWorldEntity());
+				
+		LocationPrintVisitor printVisitor = new LocationPrintVisitor();
 		
-		System.out.println(World.getInstance().getWorldEntity());
+		World.getInstance().getWorldEntity().accept(printVisitor);
+		
+		System.out.println(printVisitor.getPrintOut());
 		
 		if (!World.getInstance().confirmPlayer(
 				"administrator", "password")) {

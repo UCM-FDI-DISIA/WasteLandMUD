@@ -5,6 +5,7 @@ import java.util.List;
 
 import world.Room;
 import world.location.Location;
+import world.visitor.LocationVisitor;
 
 public class LocationComposite implements Location {
 
@@ -60,6 +61,11 @@ public class LocationComposite implements Location {
 		return nestedLocations;
 	}
 
+	@Override
+	public void accept(LocationVisitor vis) {
+		vis.visit(this);		
+	}
+
 	public String toString() {
 		
 		StringBuffer out = new StringBuffer();
@@ -85,5 +91,4 @@ public class LocationComposite implements Location {
 		
 		return out.toString();
 	}
-
 }
