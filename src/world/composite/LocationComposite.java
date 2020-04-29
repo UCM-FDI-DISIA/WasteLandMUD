@@ -64,6 +64,10 @@ public class LocationComposite implements Location {
 	@Override
 	public void accept(LocationVisitor vis) {
 		vis.visit(this);		
+
+		for(Location nestedLoc : this.getChildren()) {
+			nestedLoc.accept(vis);
+		}
 	}
 
 	public String toString() {

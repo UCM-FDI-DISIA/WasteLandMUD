@@ -11,6 +11,8 @@ import world.WorldNotFoundException;
 import world.creation.builder.WorldBuilder;
 import world.creation.builder.WorldBuilderImpl;
 import world.creation.builder.WorldDataParser;
+import world.visitor.census.LocationCensusVisitor;
+import world.visitor.inventory.LocationInventoryVisitor;
 import world.visitor.print.LocationPrintVisitor;
 
 /**
@@ -76,12 +78,28 @@ public class MudServer {
 		}
 
 		//System.out.println(World.getInstance().getWorldEntity());
-				
+		
+		/*
 		LocationPrintVisitor printVisitor = new LocationPrintVisitor();
 		
 		World.getInstance().getWorldEntity().accept(printVisitor);
 		
 		System.out.println(printVisitor.getPrintOut());
+		*/
+
+		/*
+		LocationCensusVisitor censusVisitor = new LocationCensusVisitor();
+		
+		World.getInstance().getWorldEntity().accept(censusVisitor);
+		
+		System.out.println(censusVisitor.getPrintOut());
+		*/
+
+		LocationInventoryVisitor censusVisitor = new LocationInventoryVisitor();
+		
+		World.getInstance().getWorldEntity().accept(censusVisitor);
+		
+		System.out.println(censusVisitor.getPrintOut());
 		
 		if (!World.getInstance().confirmPlayer(
 				"administrator", "password")) {
