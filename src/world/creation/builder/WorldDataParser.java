@@ -304,8 +304,8 @@ public class WorldDataParser {
 
 		strategyString = strategyString.substring(9);
 
-		System.out.println(name);
-		System.out.println(strategyString);
+		//System.out.println(name);
+		//System.out.println(strategyString);
 		
 		String strategy = strategyString;
 		
@@ -316,9 +316,9 @@ public class WorldDataParser {
 			message4strategy = strategyString.substring(strategyString.indexOf(' ')+1,strategyString.length());
 		}		
 		
-		System.out.println(name);
-		System.out.println(strategy);
-		System.out.println(message4strategy);
+		//System.out.println(name);
+		//System.out.println(strategy);
+		//System.out.println(message4strategy);
 
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
