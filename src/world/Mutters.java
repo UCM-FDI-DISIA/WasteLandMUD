@@ -191,4 +191,9 @@ public class Mutters extends Strategy implements Runnable {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Strategy cloneStrategy() {
+		return new Mutters(this.chatterText);
+	}
 }

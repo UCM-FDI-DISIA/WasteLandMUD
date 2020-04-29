@@ -42,5 +42,7 @@ public abstract class Strategy implements Serializable {
 	 * on there strategy will either attack a human player, say something, etc.
 	 */
 	public abstract void onRoomChange();
+	
+	public abstract Strategy cloneStrategy();
 
 }

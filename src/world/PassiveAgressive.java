@@ -43,4 +43,8 @@ public class PassiveAgressive extends Strategy {
 
 	}
 
+	@Override
+	public Strategy cloneStrategy() {
+		return new PassiveAgressive();
+	}
 }

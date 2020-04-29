@@ -46,4 +46,8 @@ public class Greets extends Strategy {
 
 	}
 
+	@Override
+	public Strategy cloneStrategy() {
+		return new Greets();
+	}
 }

@@ -320,4 +320,14 @@ public class Mobile extends DatabaseObject implements Movable {
 	public boolean getFighting() {
 		return false;
 	}
+	
+	public Mobile clone() {
+		
+		Mobile clone = new Mobile(this.getName());
+		
+		clone.setDescription(this.getDescription());
+		clone.setStrategy(this.getStrategy().cloneStrategy());
+		
+		return clone;
+	}
 }

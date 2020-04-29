@@ -75,6 +75,12 @@ public class Agressive extends Strategy {
 		}
 	}
 
+
+	@Override
+	public Strategy cloneStrategy() {
+		return new Agressive();
+	}
+
 	private class AttackTimerListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
