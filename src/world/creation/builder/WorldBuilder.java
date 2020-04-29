@@ -17,4 +17,8 @@ public interface WorldBuilder {
 	public void addMobile(String where, Object mobile);
 
 	public void addStatToMobile(String name, String trait, int value);
+	
+	public void populateWith(String howMany, Object mobile);
+	
+	public void populate();
 }

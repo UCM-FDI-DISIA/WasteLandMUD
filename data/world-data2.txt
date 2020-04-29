@@ -925,3 +925,11 @@ ADD AH AH-BroodTunnelCave
 
 ADD WorldEntity AH
 
+
+Mobile
+Name Passer By
+Description 
+A local inhabitant.
+END
+Strategy M Passerby walks by attending its business.
+Location CLONE 50

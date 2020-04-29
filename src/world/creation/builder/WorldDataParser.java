@@ -110,7 +110,9 @@ public class WorldDataParser {
 			if(line.startsWith("Stat")) {
 				this.updateStat(line);			
 			}			
-		}		
+		}	
+		
+		builder.populate();	
 	}
 	
 	private void buildRoom(String line, StringTokenizer st) {
@@ -287,25 +289,55 @@ public class WorldDataParser {
 		
 		String strategyString = st.nextToken();
 		
+		/*
 		StringTokenizer stStrategy = new StringTokenizer(strategyString," ");
 		
 		stStrategy.nextToken();
 		
-		String strategy = stStrategy.nextToken();
-		String message4strategy = "";
+//		String strategy = stStrategy.nextToken();
+//		String message4strategy = "";
+//		
+//		if(stStrategy.hasMoreTokens()) {
+//			message4strategy = stStrategy.nextToken();
+//		}
+		*/
+
+		strategyString = strategyString.substring(9);
+
+		System.out.println(name);
+		System.out.println(strategyString);
 		
-		if(stStrategy.hasMoreTokens()) {
-			message4strategy = stStrategy.nextToken();
-		}
+		String strategy = strategyString;
+		
+		String message4strategy = "";
+
+		if(strategyString.indexOf(' ')>-1) {
+			strategy = strategyString.substring(0,strategyString.indexOf(' '));
+			message4strategy = strategyString.substring(strategyString.indexOf(' ')+1,strategyString.length());
+		}		
+		
+		System.out.println(name);
+		System.out.println(strategy);
+		System.out.println(message4strategy);
 
 		String locationString = st.nextToken();
 		String where = locationString.substring(9);
 		
 		Mobile mobile = mobileFactory.createMobile(name, description.toString(), strategy, message4strategy);
+	
+		if(where.startsWith("CLONE")) {
 			
-		//System.out.println("Buit mobile " + mobile.getName());
-		
-		builder.addMobile(where, mobile);
+			this.storeMobile2clone(where, mobile);			
+		}
+		else {
+			//System.out.println("Buit mobile " + mobile.getName());
+			
+			builder.addMobile(where, mobile);			
+		}
+	}
+	
+	private void storeMobile2clone(String where, Mobile mobile) {
+		builder.populateWith(where, mobile);		
 	}
 
 	private void updateStat(String line) {

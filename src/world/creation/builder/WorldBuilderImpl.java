@@ -1,7 +1,10 @@
 package world.creation.builder;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import world.Direction;
 import world.Gear;
@@ -22,12 +25,20 @@ public class WorldBuilderImpl implements WorldBuilder {
 	Map<String,GearContainer> gearContainerSet;
 	Map<String,Mobile> mobileSet;
 
+	Map<String,Mobile> mobilePopulators;
+	
+	Random picker;
+
 	public WorldBuilderImpl() {
 		roomSet = new HashMap<String,Room>();
 		gearContainerSet = new HashMap<String,GearContainer>();
 		mobileSet = new HashMap<String,Mobile>();
 		
+		mobilePopulators = new HashMap<String,Mobile>();
+		
 		worldBeingBuilt = World.getInstance();
+		
+		picker = new Random(System.currentTimeMillis());
 	}
 	
 	@Override
@@ -181,6 +192,44 @@ public class WorldBuilderImpl implements WorldBuilder {
 		}
 		
 		return thisOne;		
+	}
+
+	@Override
+	public void populateWith(String howMany, Object mobile) {
+		
+		mobilePopulators.put(howMany, (Mobile)mobile);		
+	}
+	
+	private String getRoomAtRandom() {
+		
+		List<String> listOfRoomTags = new LinkedList<String>(roomSet.keySet());
+		
+		int choice = picker.nextInt(listOfRoomTags.size());
+		
+		return listOfRoomTags.get(choice);
+	}
+
+	@Override
+	public void populate() {
+		
+		for(String key : mobilePopulators.keySet()) {
+
+			String howMany = key.substring(6);
+			int number = Integer.parseInt(howMany);
+			
+			Mobile prototype = mobilePopulators.get(key);
+			
+			for(int n = 0; n < number; n++) {
+				
+				String whichRoom = this.getRoomAtRandom();				
+
+				Mobile prototypeClone = prototype.clone();
+				
+				prototypeClone.setName(prototype.getName()+n);
+				
+				this.addMobile(whichRoom, prototypeClone);				
+			}			
+		}		
 	}
 }
 
