@@ -87,19 +87,22 @@ public class MudServer {
 		System.out.println(printVisitor.getPrintOut());
 		*/
 
-		/*
+		/*	*/
 		LocationCensusVisitor censusVisitor = new LocationCensusVisitor();
 		
 		World.getInstance().getWorldEntity().accept(censusVisitor);
 		
 		System.out.println(censusVisitor.getPrintOut());
-		*/
+	
 
+		/*
 		LocationInventoryVisitor censusVisitor = new LocationInventoryVisitor();
 		
 		World.getInstance().getWorldEntity().accept(censusVisitor);
 		
 		System.out.println(censusVisitor.getPrintOut());
+		
+		*/
 		
 		if (!World.getInstance().confirmPlayer(
 				"administrator", "password")) {

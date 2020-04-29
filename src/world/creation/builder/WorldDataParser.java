@@ -50,6 +50,8 @@ public class WorldDataParser {
 	}
 	
 	public void parseFile(String fileAddress) {
+
+		builder.buildRoom("0", "Home Room", "Silly room not used for anything but required to make access to DatabaseObject array.");
 		
 		String fileContent = this.readLineByLineJava8(fileAddress);
 		

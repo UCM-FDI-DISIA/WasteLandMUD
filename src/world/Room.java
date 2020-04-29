@@ -110,9 +110,20 @@ public class Room extends DatabaseObject {
 		if (result) {
 			System.out.println(movableToAdd.getName() + " added to room "
 					+ this.getName());
+
 			if (movableToAdd instanceof Player) {
 				this.refreshMobiles();
 			}
+			/*
+			if (movableToAdd instanceof Player) {
+				this.refreshPlayers();
+			}
+			*/
+			/*
+			if (movableToAdd instanceof Mobile) {
+				this.refreshMobiles();
+			}
+			*/
 		}
 
 		return result;

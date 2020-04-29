@@ -21,19 +21,21 @@ public class LocationCensusVisitor implements LocationVisitor {
 		
 		Room room = loc.getRoom();
 		List<Movable> who = room.listMovables();
+
 		
 		if(!who.isEmpty()) {
 
-			out.append("*");
 			out.append(loc.getName());
-			out.append("\n");
+			out.append("[");
 			
 			for(Movable mov : who) {
 
-				out.append("\t");
 				out.append(mov.getName());
-				out.append("\n");
+				out.append(" / ");
 			}
+
+			out.append("]");
+			out.append("\n");
 		}
 	}
 

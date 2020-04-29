@@ -117,7 +117,11 @@ public class WorldBuilderImpl implements WorldBuilder {
 				mobileRep.moveToRoom(room);
 				mobileRep.setStart(room);
 
+				// happens within moveToRoom()
 				//room.add(mobileRep);	
+
+				//
+				worldBeingBuilt.createMobile(mobileRep);
 			}
 		}		
 	}

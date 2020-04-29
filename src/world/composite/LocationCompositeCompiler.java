@@ -47,7 +47,7 @@ public class LocationCompositeCompiler  extends LocationAbstractCompiler{
 			locations.add(loc);		
 		}
 		
-		return locations.get(0);
+		return locations.get(1);
 		
 	}
 
