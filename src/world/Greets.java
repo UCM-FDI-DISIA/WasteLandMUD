@@ -21,6 +21,7 @@ public class Greets extends Strategy {
 
 	@Override
 	public void reactToSend(String sent, Mobile mob) {
+		
 		Scanner sentStuff = new Scanner(sent);
 		String aPlayer = sentStuff.next().trim();
 		String nextWord = sentStuff.next().trim();
@@ -35,7 +36,6 @@ public class Greets extends Strategy {
 						+ " waves goodbye to " + aPlayer + ".");
 			}
 		}
-
 	}
 
 	@Override
