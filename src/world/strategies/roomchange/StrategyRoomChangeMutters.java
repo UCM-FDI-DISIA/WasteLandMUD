@@ -3,8 +3,12 @@ package world.strategies.roomchange;
 import world.Mobile;
 import world.strategies.StrategyOnRoomChange;
 
-public class StrategyRoomChangeMutters implements StrategyOnRoomChange {
+public class StrategyRoomChangeMutters extends StrategyOnRoomChange {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7881841340116322477L;
 	private Mobile mobile;
 
 	public StrategyRoomChangeMutters() {

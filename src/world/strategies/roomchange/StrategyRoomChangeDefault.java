@@ -2,7 +2,12 @@ package world.strategies.roomchange;
 
 import world.strategies.StrategyOnRoomChange;
 
-public class StrategyRoomChangeDefault implements StrategyOnRoomChange {
+public class StrategyRoomChangeDefault extends StrategyOnRoomChange {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4223487205991004710L;
 
 	public StrategyRoomChangeDefault() {
 		

@@ -1,6 +1,13 @@
 package world.strategies;
 
-public interface StrategyOnRoomChange {
+import java.io.Serializable;
+
+public abstract class StrategyOnRoomChange implements Serializable {
 	
-	public void onRoomChange();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3341084937280815904L;
+
+	public abstract void onRoomChange();
 }

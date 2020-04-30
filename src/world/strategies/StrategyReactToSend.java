@@ -1,8 +1,15 @@
 package world.strategies;
 
+import java.io.Serializable;
+
 import world.Mobile;
 
-public interface StrategyReactToSend {
+public abstract class StrategyReactToSend   implements Serializable {
 	
-	public void reactToSend(String sent, Mobile mob);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1486999206981070030L;
+
+	public abstract void reactToSend(String sent, Mobile mob);
 }

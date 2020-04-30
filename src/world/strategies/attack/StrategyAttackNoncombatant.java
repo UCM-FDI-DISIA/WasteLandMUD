@@ -5,7 +5,12 @@ import world.Movable;
 import world.Room;
 import world.strategies.StrategyAttackBehaviour;
 
-public class StrategyAttackNoncombatant implements StrategyAttackBehaviour {
+public class StrategyAttackNoncombatant extends StrategyAttackBehaviour {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8581031017882071485L;
 
 	public StrategyAttackNoncombatant() {
 		// TODO Auto-generated constructor stub

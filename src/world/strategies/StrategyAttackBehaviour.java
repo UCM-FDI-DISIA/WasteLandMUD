@@ -1,9 +1,16 @@
 package world.strategies;
 
+import java.io.Serializable;
+
 import world.Mobile;
 import world.Movable;
 
-public interface StrategyAttackBehaviour {
+public abstract class StrategyAttackBehaviour  implements Serializable {
 	
-	public void attackBehavior(Mobile me, Movable enemy);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7531598655067542151L;
+
+	public abstract void attackBehavior(Mobile me, Movable enemy);
 }

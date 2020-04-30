@@ -13,8 +13,12 @@ import world.Room;
 import world.World;
 import world.strategies.StrategyReactToSend;
 
-public class StrategySendAgressive implements StrategyReactToSend {
+public class StrategySendAgressive extends StrategyReactToSend {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6275788458575929478L;
 	private Mobile mySelf;
 	private Player toAttack;
 

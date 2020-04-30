@@ -7,7 +7,12 @@ import world.Room;
 import world.World;
 import world.strategies.StrategyReactToSend;
 
-public class StrategySendGreets implements StrategyReactToSend {
+public class StrategySendGreets extends StrategyReactToSend {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3799964071795494047L;
 
 	public StrategySendGreets() {
 
