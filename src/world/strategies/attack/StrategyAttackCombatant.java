@@ -20,4 +20,9 @@ public class StrategyAttackCombatant extends StrategyAttackBehaviour {
 
 		me.resolveAttack(enemy);
 	}
+
+	@Override
+	public StrategyAttackBehaviour cloneStrategy() {
+		return new StrategyAttackCombatant();
+	}
 }

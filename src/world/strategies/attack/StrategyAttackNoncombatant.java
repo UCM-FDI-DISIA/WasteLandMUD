@@ -23,4 +23,9 @@ public class StrategyAttackNoncombatant extends StrategyAttackBehaviour {
 				+ " shouts, \" Help! " + enemy.getName()
 				+ " is attacking me! \" ");
 	}
+
+	@Override
+	public StrategyAttackBehaviour cloneStrategy() {
+		return new StrategyAttackNoncombatant();
+	}
 }

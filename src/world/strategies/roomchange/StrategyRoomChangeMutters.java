@@ -26,4 +26,10 @@ public class StrategyRoomChangeMutters extends StrategyOnRoomChange {
 		// TODO not impplemented yet.
 		//System.out.println(this.mobile.getName() + " changes room.");
 	}
+
+	@Override
+	public StrategyOnRoomChange cloneStrategy() {
+
+		return new StrategyRoomChangeMutters();
+	}
 }

@@ -30,4 +30,10 @@ public class StrategySendsMutters extends StrategyReactToSend {
 		
 		sentStuff.close();
 	}
+
+	@Override
+	public StrategyReactToSend cloneStrategy() {
+
+		return new StrategySendsMutters();
+	}
 }

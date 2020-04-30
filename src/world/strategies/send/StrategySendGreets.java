@@ -38,4 +38,10 @@ public class StrategySendGreets extends StrategyReactToSend {
 		
 		sentStuff.close();
 	}
+
+	@Override
+	public StrategyReactToSend cloneStrategy() {
+
+		return new StrategySendGreets();
+	}
 }

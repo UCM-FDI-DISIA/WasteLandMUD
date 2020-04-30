@@ -19,4 +19,10 @@ public class StrategyRoomChangeDefault extends StrategyOnRoomChange {
 		// Does nothing when it changes rooms. Shouldn't be changing rooms
 		// anyway.
 	}
+
+	@Override
+	public StrategyOnRoomChange cloneStrategy() {
+
+		return new StrategyRoomChangeDefault();
+	}
 }

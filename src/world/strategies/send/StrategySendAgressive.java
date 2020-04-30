@@ -69,4 +69,10 @@ public class StrategySendAgressive extends StrategyReactToSend {
 			}
 		}
 	}
+
+	@Override
+	public StrategyReactToSend cloneStrategy() {
+
+		return new StrategySendAgressive();
+	}
 }
