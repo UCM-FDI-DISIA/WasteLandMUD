@@ -7,15 +7,18 @@ import world.strategies.StrategyOnRoomChange;
 import world.strategies.StrategyReactToSend;
 
 public class StateGenericImpl extends State4Mobile {
-	
-	private static final long serialVersionUID = 3039773453796280139L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7554048009829308018L;
 	
 	StrategyAttackBehaviour attack;
 	StrategyReactToSend send;
 	StrategyOnRoomChange roomChange;
 
 	public StateGenericImpl() {
-		
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class StateGenericImpl extends State4Mobile {
 
 	@Override
 	public State4Mobile cloneState4Mobile() {
-
-		return new StateGenericImpl();
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

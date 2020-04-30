@@ -29,9 +29,16 @@ public class StateMutters extends StateGenericImpl implements Runnable {
 	}
 
 	public StateMutters(String chatterText) {
+		this();
 		this.chatterText = chatterText;
 		this.thread = new Thread(this);
 		this.thread.start();
+	}
+
+	@Override
+	public State4Mobile cloneState4Mobile() {
+
+		return new StateMutters();
 	}
 
 	/**

@@ -7,6 +7,9 @@ import java.util.List;
 
 import javax.swing.Timer;
 
+import world.state.State4Mobile;
+import world.state.StateGreets;
+
 /**
  * Mobile is a class which represents Mobiles, or any non-player object with
  * behavior similar to that of a player (such as the ability to fight, or a set
@@ -30,7 +33,7 @@ public class Mobile extends DatabaseObject implements Movable {
 	private int toughness;
 	private int intellect;
 	private GearList gearList;
-	private Strategy myStrategy;
+	private State4Mobile myState;
 	private int roomId;
 	private Mobile mySelf;
 
@@ -52,7 +55,7 @@ public class Mobile extends DatabaseObject implements Movable {
 	 */
 	public Mobile(String name) {
 		super(name);
-		myStrategy = new Greets();
+		myState = new StateGreets();
 		this.gearList = new GearContainer(name + "'s gear", name + "'s gear:",
 				20, false);
 		this.agility = 5;
@@ -135,13 +138,13 @@ public class Mobile extends DatabaseObject implements Movable {
 
 	@Override
 	public void sendToPlayer(String message) {
-		if (myStrategy != null)
-			myStrategy.reactToSend(message, this);
+		if (myState != null)
+			myState.reactToSend(message, this);
 	}
 
 	@Override
 	public void attack(Movable enemy) {
-		myStrategy.attackBehavior(this, enemy);
+		myState.attackBehavior(this, enemy);
 	}
 
 	@Override
@@ -250,8 +253,8 @@ public class Mobile extends DatabaseObject implements Movable {
 	 * @param myStrategy
 	 *            - A Strategy object used to determine the mobile's behavior.
 	 */
-	public void setStrategy(Strategy myStrategy) {
-		this.myStrategy = myStrategy;
+	public void setState(State4Mobile myState) {
+		this.myState = myState;
 	}
 
 	/**
@@ -260,8 +263,8 @@ public class Mobile extends DatabaseObject implements Movable {
 	 * @return - The mobile's Strategy objectg used to determine how it behaves
 	 *         with the world.
 	 */
-	public Strategy getStrategy() {
-		return myStrategy;
+	public State4Mobile getState() {
+		return myState;
 	}
 
 	/**
@@ -326,7 +329,7 @@ public class Mobile extends DatabaseObject implements Movable {
 		Mobile clone = new Mobile(this.getName());
 		
 		clone.setDescription(this.getDescription());
-		clone.setStrategy(this.getStrategy().cloneStrategy());
+		clone.setState(this.getState().cloneState4Mobile());
 		
 		return clone;
 	}

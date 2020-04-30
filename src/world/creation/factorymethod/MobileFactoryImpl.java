@@ -1,7 +1,7 @@
 package world.creation.factorymethod;
 
 import world.Mobile;
-import world.Strategy;
+import world.state.State4Mobile;
 
 public class MobileFactoryImpl implements MobileFactory {
 	
@@ -27,13 +27,13 @@ public class MobileFactoryImpl implements MobileFactory {
 	 * @return The created MOB, or null if duplicate
 	 */
 	public Mobile createMobile(String name, String description, 
-			String whichStrategy, String message4strategy) {
+			String whichState, String message4strategy) {
 		
 		Mobile temp = new Mobile(name);
 		
-		Strategy specificStrategy = StrategyEncoder.buildStrategy(whichStrategy, message4strategy, temp);		
+		State4Mobile specificState = StateEncoder.buildState(whichState, message4strategy, temp);		
 
-		temp.setStrategy(specificStrategy);
+		temp.setState(specificState);
 		temp.setDescription(description);
 		
 		return temp;

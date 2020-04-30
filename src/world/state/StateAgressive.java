@@ -14,4 +14,10 @@ public class StateAgressive extends StateGenericImpl {
 		 send = new StrategySendAgressive();
 		 roomChange = new StrategyRoomChangeDefault();
 	}
+
+	@Override
+	public State4Mobile cloneState4Mobile() {
+
+		return new StateAgressive();
+	}
 }
