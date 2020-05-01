@@ -1,5 +1,6 @@
 # WasteLandMUD
-Source code for WasteLandMUD
+Source code for WasteLandMUDRefactored
+
 This code is an ongoing initiative to use an existing Java code project 
 (the WastelandMUD game by Matt Turner, Ross Bottorf, Zach Boe and Jonathan Perrine) as 
 an example for my students of Software Engineering of how 
